@@ -37,7 +37,7 @@ namespace ofxTSPS {
             //delete currentSource;
         }
         tspsProcessor->exit();
-        delete tspsProcessor;
+        //delete tspsProcessor;
     }
     
     //---------------------------------------------------------------------------
@@ -456,6 +456,8 @@ namespace ofxTSPS {
                 break;
             case CAMERA_CUSTOM:
                 setUseCustomSource();
+                break;
+            case CAMERA_UNDEFINED:
                 break;
         }
         
