@@ -1,0 +1,4 @@
+In "ofxNI2" submodule, change line 150 of ofxNI2.cpp, it should return false:
+
+if (recorder) return;
+>>if (recorder) return false;

@@ -5,6 +5,7 @@
 
 #include "ofxTSPS/gui/GuiManager.h"
 #include "ofxTSPS/gui/Settings.h"
+#include "ayb_guiMod.h"
 
 namespace ofxTSPS {
     enum{
@@ -485,6 +486,10 @@ namespace ofxTSPS {
         
         // end setup data panel
         
+        AYB_guiMod ayb_guiMod;
+        ayb_guiMod.injectGUI(panel,panelGroups,source_types);
+        
+        // END setup, cleanup...
         //listen for save / load / reload / saveas events from GUI + pass to quadgui
         
         ofAddListener(panel.getSaveButton()->buttonPressed, this, &GuiManager::saveEventCatcher);
@@ -959,6 +964,10 @@ namespace ofxTSPS {
         //get current panel
         //settings.lastCurrentPanel = settings.currentPanel;
         settings.currentPanel = panel.getSelectedPanelIndex();
+    
+        // Update custom
+        AYB_guiMod ayb_guiMod;
+        ayb_guiMod.processGUIUpdates(panel, settings);
     }
     
     //BR: Added some messiness here to setup, draw, and update the gui quad...

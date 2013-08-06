@@ -142,6 +142,7 @@ namespace ofxTSPS {
         string currentXmlFile;
         SourceType      inputType;
         
+        
     private:
         Source*         source;
         
