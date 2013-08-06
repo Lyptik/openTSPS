@@ -1,3 +1,11 @@
+About the fork
+------------
+
+This fork does implement depth tracking algorithms in openTSPS
+
+Implementation is made as proxy for now, trying to change original code as less as possible
+
+------------
 About
 ------------
 TSPS is a toolkit for sensing people in spaces meant for both prototyping and permanent installations. 
