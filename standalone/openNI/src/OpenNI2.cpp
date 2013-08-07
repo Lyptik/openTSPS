@@ -25,15 +25,16 @@ ofxTSPS::OpenNI2::~OpenNI2(){
     delete device;
 }
 
-// core
+// Return availble device (tries to initialize one if we call this before init, which you shouldn't do)
 bool ofxTSPS::OpenNI2::available(){
     if ( device == NULL ){
-        device = new ofxNI2::Device;
+        device = new Ayb_openNI2Device;
         device->setup();
     }
     return (device->listDevices() >= 1);
 }
 
+// Update:
 void ofxTSPS::OpenNI2::update(){
     device->update();
     if ( !bDoProcessFrame ){
@@ -45,25 +46,28 @@ void ofxTSPS::OpenNI2::update(){
     #endif
 }
 
+// getPixels: 
 unsigned char * ofxTSPS::OpenNI2::getPixels(){
     return getPixelsRef().getPixels();
 }
 
+// getPixelsRef:
 ofPixels & ofxTSPS::OpenNI2::getPixelsRef(){
     static ofPixels retPix;
     depthRemapToRange(ofxNI2::DepthStream::getPixelsRef(), retPix, nearClipping, farClipping, false);
     return retPix;
 }
 
+
+// Per frame
 bool ofxTSPS::OpenNI2::doProcessFrame(){
     bool bReturn = bDoProcessFrame;
     if ( bDoProcessFrame ) bDoProcessFrame = false;
     return bReturn;
 }
 
-// fixed invert...
-inline void ofxTSPS::OpenNI2::depthRemapToRange(const ofShortPixels &src, ofPixels &dst, int near, int far, int invert)
-{
+// Convert depthmap value to range
+inline void ofxTSPS::OpenNI2::depthRemapToRange(const ofShortPixels &src, ofPixels &dst, int near, int far, int invert){
     int N = src.getWidth() * src.getHeight();
     dst.allocate(src.getWidth(), src.getHeight(), 1);
     
@@ -89,43 +93,62 @@ bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
     
     // Initialize if device is null
     if ( device == NULL ){
-        device = new ofxNI2::Device;
+        device = new Ayb_openNI2Device;
         device->setup();
     }
     
-    // Only try to attach device once
-    if ( !bDepthSetup ){
-        bIsOpen = setup(*device);
-        if ( farClipping == -1 ) farClipping = stream.getMaxPixelValue();
-        setFps(30);
-        bDepthSetup  = bIsOpen;
-    } else {
-        bIsOpen = true;
+    // If initialization failed, the object exists
+    
+    //openni::Device thisDevice = device->get();
+    
+    cout << this->device->device.m_device;
+    cout << this->device->get().m_device;
+    
+    
+    if ( == NULL){
+         cout << "OpenNI2: Cannot locate suitable device - is hardware plugged in?";
+        return false;
+        
+    // Init okay, make sure we attach device (do this once)
+    }else{
+        
+        if ( !bDepthSetup ){
+            bIsOpen = setup(*device);
+            if ( farClipping == -1 ) farClipping = stream.getMaxPixelValue();
+            setFps(30);
+            bDepthSetup  = bIsOpen;
+        } else {
+            bIsOpen = true;
+        }
+        
+        if (bIsOpen){start();}
+        
+        return bIsOpen;
+
     }
-    
-    if (bIsOpen){start();}
-    
-    return bIsOpen;
 }
 
+// Close the source
 void ofxTSPS::OpenNI2::closeSource(){
     stream.stop();
     bIsOpen = false;
 }
 
 // Return the device handle (fail if it isn't initialized)
-ofxNI2::Device * ofxTSPS::OpenNI2::getDevice(){
+ofxTSPS::Ayb_openNI2Device * ofxTSPS::OpenNI2::getDevice(){
     if (device == NULL){
-        ofLogError("OpenNI2") << "Cannot return device handle, device not initilized!";
+        ofLogError("OpenNI2") << "Cannot return device handle, device not initialized!";
         throw;
     }
     return device;
 }
 
+// Set the near clipping
 void ofxTSPS::OpenNI2::setNearClipping( int near ){
     nearClipping = max(0,near);
 }
 
+// Set the far clipping
 void ofxTSPS::OpenNI2::setFarClipping( int far ){
     farClipping = min( far, bIsOpen ? stream.getMaxPixelValue() : 10000 );
 }
