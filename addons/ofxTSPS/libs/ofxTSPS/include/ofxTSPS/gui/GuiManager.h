@@ -34,6 +34,7 @@
 
 #include "ofxLabGui.h"
 #include "ofxTSPS/gui/Settings.h"
+#include "ayb_guiMod.h"
 
 // maybe there's a simpler way to integrate this?
 #include "ofxCvCoordWarpingGui.h"
@@ -175,5 +176,6 @@ namespace ofxTSPS {
     private:
         guiTypeGroup * haarGroup;
         guiTypeGroup * opticalFlowGroup;
+        AYB_guiMod ayb_guiMod;
     };
 }

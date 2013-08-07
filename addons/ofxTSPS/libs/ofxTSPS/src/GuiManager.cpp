@@ -497,7 +497,7 @@ namespace ofxTSPS {
         
         // end setup data panel
         
-        AYB_guiMod ayb_guiMod;
+        
         ayb_guiMod.injectGUI(panel,panelGroups,source_types);
         
         // END setup, cleanup...
@@ -977,7 +977,7 @@ namespace ofxTSPS {
         settings.currentPanel = panel.getSelectedPanelIndex();
     
         // Update custom
-        AYB_guiMod ayb_guiMod;
+        
         ayb_guiMod.processGUIUpdates(panel, settings);
     }
     

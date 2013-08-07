@@ -8,7 +8,7 @@
 #include "OpenNI2.h"
 #include "ofxTSPS/source/Source.h"
 
-
+// Constructor
 ofxTSPS::OpenNI2::OpenNI2(){
     // type defaults to CAMERA_CUSTOM
     bCanTrackHaar = false;
@@ -19,6 +19,7 @@ ofxTSPS::OpenNI2::OpenNI2(){
     farClipping = -1; // will be reset to max value
 }
 
+// Destructor
 ofxTSPS::OpenNI2::~OpenNI2(){
     device->exit();
     delete device;
@@ -83,28 +84,27 @@ inline void ofxTSPS::OpenNI2::depthRemapToRange(const ofShortPixels &src, ofPixe
     }
 }
 
+// Open the hardware 
 bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
-    // setup device?
+    
+    // Initialize if device is null
     if ( device == NULL ){
         device = new ofxNI2::Device;
         device->setup();
     }
     
-    // only try to attach device once
+    // Only try to attach device once
     if ( !bDepthSetup ){
         bIsOpen = setup(*device);
         if ( farClipping == -1 ) farClipping = stream.getMaxPixelValue();
-        //                setSize(320, 240);
         setFps(30);
         bDepthSetup  = bIsOpen;
     } else {
         bIsOpen = true;
     }
     
-    if (bIsOpen)
-    {
-        start();
-    }
+    if (bIsOpen){start();}
+    
     return bIsOpen;
 }
 
@@ -113,8 +113,12 @@ void ofxTSPS::OpenNI2::closeSource(){
     bIsOpen = false;
 }
 
-// Be careful, might be null!
+// Return the device handle (fail if it isn't initialized)
 ofxNI2::Device * ofxTSPS::OpenNI2::getDevice(){
+    if (device == NULL){
+        ofLogError("OpenNI2") << "Cannot return device handle, device not initilized!";
+        throw;
+    }
     return device;
 }
 

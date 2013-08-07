@@ -698,9 +698,9 @@
 				57D168EF17B289CB0020DF75 /* ayb_kernel.cpp */,
 				57D168F017B289CB0020DF75 /* ayb_kernel.h */,
 				4915045117B12F5A002D1022 /* ayb_guiMod.h */,
+				4915045017B12F5A002D1022 /* ayb_guiMod.cpp */,
 				49B15E4B17B15B2B00A4D8A4 /* ayb_settings.cpp */,
 				49B15E4C17B15B2B00A4D8A4 /* ayb_settings.h */,
-				4915045017B12F5A002D1022 /* ayb_guiMod.cpp */,
 			);
 			name = "Augmented Blob";
 			sourceTree = "<group>";
