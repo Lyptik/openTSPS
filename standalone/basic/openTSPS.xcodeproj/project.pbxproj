@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2E12CFF515F8168B00D5BC05 /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CFF315F8168B00D5BC05 /* Processor.cpp */; };
+		5791537C17B2A134001BDC73 /* ayb_guiMod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791537617B2A134001BDC73 /* ayb_guiMod.cpp */; };
+		5791537D17B2A134001BDC73 /* ayb_kernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791537817B2A134001BDC73 /* ayb_kernel.cpp */; };
+		5791537E17B2A134001BDC73 /* ayb_settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791537A17B2A134001BDC73 /* ayb_settings.cpp */; };
 		A92EE0CA15FD289900C0A11B /* TSPSEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92EE0C915FD289900C0A11B /* TSPSEvents.cpp */; };
 		A94099E4174C2D80002BAAA0 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A94099D0174C2D80002BAAA0 /* Syphon.framework */; };
 		A94099E5174C2D80002BAAA0 /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A94099D3174C2D80002BAAA0 /* SyphonNameboundClient.m */; };
@@ -151,6 +154,12 @@
 
 /* Begin PBXFileReference section */
 		2E12CFF315F8168B00D5BC05 /* Processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Processor.cpp; sourceTree = "<group>"; };
+		5791537617B2A134001BDC73 /* ayb_guiMod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_guiMod.cpp; sourceTree = "<group>"; };
+		5791537717B2A134001BDC73 /* ayb_guiMod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_guiMod.h; sourceTree = "<group>"; };
+		5791537817B2A134001BDC73 /* ayb_kernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_kernel.cpp; sourceTree = "<group>"; };
+		5791537917B2A134001BDC73 /* ayb_kernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_kernel.h; sourceTree = "<group>"; };
+		5791537A17B2A134001BDC73 /* ayb_settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_settings.cpp; sourceTree = "<group>"; };
+		5791537B17B2A134001BDC73 /* ayb_settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_settings.h; sourceTree = "<group>"; };
 		A92EE0C915FD289900C0A11B /* TSPSEvents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TSPSEvents.cpp; sourceTree = "<group>"; };
 		A92EE0CB15FD289F00C0A11B /* TSPSEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPSEvents.h; sourceTree = "<group>"; };
 		A94099D0174C2D80002BAAA0 /* Syphon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Syphon.framework; sourceTree = "<group>"; };
@@ -1640,6 +1649,12 @@
 		A9485E2E15C4712A00761D1C /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5791537617B2A134001BDC73 /* ayb_guiMod.cpp */,
+				5791537717B2A134001BDC73 /* ayb_guiMod.h */,
+				5791537817B2A134001BDC73 /* ayb_kernel.cpp */,
+				5791537917B2A134001BDC73 /* ayb_kernel.h */,
+				5791537A17B2A134001BDC73 /* ayb_settings.cpp */,
+				5791537B17B2A134001BDC73 /* ayb_settings.h */,
 				A9485E2F15C4712A00761D1C /* CvPerson.cpp */,
 				A9485E3015C4712A00761D1C /* CvProcessor.cpp */,
 				A9485E3215C4712A00761D1C /* GuiManager.cpp */,
@@ -2156,6 +2171,9 @@
 				A9DE154A1799CD7F000FE2BA /* registration.c in Sources */,
 				A9DE154B1799CD7F000FE2BA /* tilt.c in Sources */,
 				A9DE154C1799CD7F000FE2BA /* usb_libusb10.c in Sources */,
+				5791537C17B2A134001BDC73 /* ayb_guiMod.cpp in Sources */,
+				5791537D17B2A134001BDC73 /* ayb_kernel.cpp in Sources */,
+				5791537E17B2A134001BDC73 /* ayb_settings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2199,7 +2217,7 @@
 					"-lpthread",
 					"-mtune=native",
 				);
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -2233,7 +2251,7 @@
 					"-lpthread",
 					"-mtune=native",
 				);
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
