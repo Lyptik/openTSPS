@@ -52,6 +52,7 @@
 #include "ofxTSPS/source/Syphon.h"
 #include "ofxTSPS/source/VideoFile.h"
 #include "ofxTSPS/source/VideoGrabber.h"
+#include "OpenNI2.h" // ayb dav custom openi2 source
 
 // TSPS Processors
 #include "ofxTSPS/Processor.h"
@@ -93,7 +94,7 @@ namespace ofxTSPS {
         
             void resize( int w, int h );                //If you need to resize the camera width / height
             void mousePressed(ofMouseEventArgs &e);	
-            
+        
             // source
             void    setSource( Source & newSource );    // Use this to force to a Source or override with your own source
             bool    setupSource( SourceType type, int which=-1 );     // Setup a known source type (CAMERA_CUSTOM + CAMERA_UNDEFINED won't do anything)

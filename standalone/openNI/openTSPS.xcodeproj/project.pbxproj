@@ -12,6 +12,8 @@
 		5791538717B2A623001BDC73 /* ayb_guiMod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538117B2A623001BDC73 /* ayb_guiMod.cpp */; };
 		5791538817B2A623001BDC73 /* ayb_kernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538317B2A623001BDC73 /* ayb_kernel.cpp */; };
 		5791538917B2A623001BDC73 /* ayb_settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538517B2A623001BDC73 /* ayb_settings.cpp */; };
+		579153A117B2F222001BDC73 /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = 579153A017B2F221001BDC73 /* TODO.txt */; };
+		579153A317B2F279001BDC73 /* TOFIX.txt in Resources */ = {isa = PBXBuildFile; fileRef = 579153A217B2F279001BDC73 /* TOFIX.txt */; };
 		57D168F317B289D20020DF75 /* OpenNI2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57D168F217B289D20020DF75 /* OpenNI2.cpp */; };
 		A92EE0C715FD288900C0A11B /* TSPSEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92EE0C615FD288900C0A11B /* TSPSEvents.cpp */; };
 		A9409A18174C32EF002BAAA0 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9409A04174C32EF002BAAA0 /* Syphon.framework */; };
@@ -190,6 +192,8 @@
 		5791538417B2A623001BDC73 /* ayb_kernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_kernel.h; sourceTree = "<group>"; };
 		5791538517B2A623001BDC73 /* ayb_settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_settings.cpp; sourceTree = "<group>"; };
 		5791538617B2A623001BDC73 /* ayb_settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_settings.h; sourceTree = "<group>"; };
+		579153A017B2F221001BDC73 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO.txt; path = ../../TODO.txt; sourceTree = "<group>"; };
+		579153A217B2F279001BDC73 /* TOFIX.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TOFIX.txt; path = ../../TOFIX.txt; sourceTree = "<group>"; };
 		57D168F217B289D20020DF75 /* OpenNI2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenNI2.cpp; sourceTree = "<group>"; };
 		A92EE0C515FD287400C0A11B /* TSPSEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPSEvents.h; sourceTree = "<group>"; };
 		A92EE0C615FD288900C0A11B /* TSPSEvents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TSPSEvents.cpp; sourceTree = "<group>"; };
@@ -2279,6 +2283,8 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				579153A217B2F279001BDC73 /* TOFIX.txt */,
+				579153A017B2F221001BDC73 /* TODO.txt */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				A97BC4BE16D08AE9007CC131 /* icon.icns */,
@@ -2386,6 +2392,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A97BC4C016D08B00007CC131 /* icon.icns in Resources */,
+				579153A117B2F222001BDC73 /* TODO.txt in Resources */,
+				579153A317B2F279001BDC73 /* TOFIX.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

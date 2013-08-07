@@ -468,6 +468,10 @@ namespace ofxTSPS {
             case CAMERA_CUSTOM:
                 setUseCustomSource();
                 break;
+            // ayb dav ONI_SEQUENCE case
+            case ONI_SEQUENCE:
+                setUseVideoFile();
+                break;
             case CAMERA_UNDEFINED:
                 break;
         }
@@ -503,6 +507,17 @@ namespace ofxTSPS {
                 currentSource = new Syphon();
                 break;
 #endif                
+            // ayb dav adding custom source
+            case CAMERA_CUSTOM:
+                currentSource = new ofxTSPS::OpenNI2();
+                break;
+            case ONI_SEQUENCE:
+                etc = getVideoFile();
+                if ( etc == ""){
+                    return false;
+                }
+                currentSource = new ofxTSPS::OpenNI2();
+                break;
             default:
                 break;
         }
@@ -522,6 +537,10 @@ namespace ofxTSPS {
                 break;
             case CAMERA_CUSTOM:
                 setUseCustomSource();
+                break;
+            // ayb dav : ONI_SEQUENCE case
+            case ONI_SEQUENCE:
+                setUseVideoFile();
                 break;
             default:
                 break;

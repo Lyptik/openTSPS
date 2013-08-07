@@ -94,7 +94,10 @@ bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
     // Initialize if device is null
     if ( device == NULL ){
         device = new Ayb_openNI2Device;
-        device->setup();
+        if(etc == "")
+            device->setup();
+        else
+            device->setup(etc);
     }
     
     // If initialization failed, the object exists
@@ -109,7 +112,7 @@ bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
          cout << "OpenNI2: Cannot locate suitable device - is hardware plugged in?";
         return false;
         
-    // Init okay, make sure we attach device (do this once)
+    // Init okay, make sure we attach device (do this once)g
     }else{
         
         if ( !bDepthSetup ){
