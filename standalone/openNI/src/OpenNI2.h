@@ -4,7 +4,7 @@
 //
 //  Created by BRenfer on 7/19/13.
 //
-//
+//  AYB: I refactored this into a cpp/h file so we could work with it
 
 #pragma once
 
@@ -14,125 +14,31 @@
 
 namespace ofxTSPS {
     class OpenNI2 : public Source, public ofxNI2::DepthStream {
+    
     public:
+        OpenNI2();
+        ~OpenNI2();
         
-        OpenNI2() : Source(), ofxNI2::DepthStream()
-        {
-            // type defaults to CAMERA_CUSTOM
-            bCanTrackHaar = false;
-            bDepthSetup = false;
-            bDoProcessFrame = false;
-            device = NULL;
-            nearClipping = 0;
-            farClipping = -1; // will be reset to max value
-        }
+        bool available();
+        void update();
         
-        ~OpenNI2(){
-            device->exit();
-            delete device;
-        }
+        unsigned char * getPixels();
         
-        // core
-        bool available(){
-            if ( device == NULL ){
-                device = new ofxNI2::Device;
-                device->setup();
-            }
-            return (device->listDevices() >= 1);
-        }
-        
-        void update(){
-            device->update();
-            if ( !bDoProcessFrame ){
-                bDoProcessFrame = isFrameNew();
-            }
-            updateTextureIfNeeded();
-#ifdef TARGET_OSX
-            publishToSyphon( getTextureReference() );
-#endif
-        }
-        
-        unsigned char * getPixels(){
-            return getPixelsRef().getPixels();
-        }
-        
-        ofPixels & getPixelsRef(){
-            static ofPixels retPix;
-            depthRemapToRange(ofxNI2::DepthStream::getPixelsRef(), retPix, nearClipping, farClipping, false);
-            return retPix;
-        }
-        
-        bool doProcessFrame(){
-            bool bReturn = bDoProcessFrame;
-            if ( bDoProcessFrame ) bDoProcessFrame = false;
-            return bReturn;
-        }
+        ofPixels & getPixelsRef();
+        bool doProcessFrame();
         
         // fixed invert...
-        inline void depthRemapToRange(const ofShortPixels &src, ofPixels &dst, int near, int far, int invert)
-        {
-            int N = src.getWidth() * src.getHeight();
-            dst.allocate(src.getWidth(), src.getHeight(), 1);
-            
-            const unsigned short *src_ptr = src.getPixels();
-            unsigned char *dst_ptr = dst.getPixels();
-            
-//            float inv_range = 1. / (far - near);
-            
-            if (invert)
-                std::swap(near, far);
-            
-            for (int i = 0; i < N; i++)
-            {
-                unsigned short C = *src_ptr;
-                *dst_ptr = C == 0 ? 0 : ofMap(C, near, far, 0, 255, true);
-                src_ptr++;
-                dst_ptr++;
-            }
-        }
+        inline void depthRemapToRange(const ofShortPixels &src, ofPixels &dst, int near, int far, int invert);
         
-        bool openSource( int width, int height, string etc="" ){
-            // setup device?
-            if ( device == NULL ){
-                device = new ofxNI2::Device;
-                device->setup();
-            }
-            
-            // only try to attach device once
-            if ( !bDepthSetup ){
-                bIsOpen = setup(*device);
-                if ( farClipping == -1 ) farClipping = stream.getMaxPixelValue();
-//                setSize(320, 240);
-                setFps(30);
-                bDepthSetup  = bIsOpen;
-            } else {
-                bIsOpen = true;
-            }
-            
-            if (bIsOpen)
-            {
-                start();
-            }
-            return bIsOpen;
-        }
-        
-        void closeSource(){
-            stream.stop();
-            bIsOpen = false;
-        }
+        bool openSource( int width, int height, string etc="" );
+        void closeSource();
         
         // Be careful, might be null!
-        ofxNI2::Device * getDevice(){
-            return device;
-        }
+        ofxNI2::Device * getDevice();
         
-        void setNearClipping( int near ){
-            nearClipping = max(0,near);
-        }
+        void setNearClipping( int near );
         
-        void setFarClipping( int far ){
-            farClipping = min( far, bIsOpen ? stream.getMaxPixelValue() : 10000 );
-        }
+        void setFarClipping( int far );
         
     private:
         ofxNI2::Device *device;
