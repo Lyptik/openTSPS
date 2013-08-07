@@ -10,6 +10,7 @@
 		2E12CFF515F8168B00D5BC05 /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CFF315F8168B00D5BC05 /* Processor.cpp */; };
 		4915045217B12F5A002D1022 /* ayb_guiMod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4915045017B12F5A002D1022 /* ayb_guiMod.cpp */; };
 		49B15E4D17B15B2B00A4D8A4 /* ayb_settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49B15E4B17B15B2B00A4D8A4 /* ayb_settings.cpp */; };
+		49C2E27017B29411002C8396 /* ayb_openNI2Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C2E26E17B29410002C8396 /* ayb_openNI2Device.cpp */; };
 		57D168F117B289CB0020DF75 /* ayb_kernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57D168EF17B289CB0020DF75 /* ayb_kernel.cpp */; };
 		57D168F317B289D20020DF75 /* OpenNI2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57D168F217B289D20020DF75 /* OpenNI2.cpp */; };
 		A92EE0C715FD288900C0A11B /* TSPSEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92EE0C615FD288900C0A11B /* TSPSEvents.cpp */; };
@@ -185,6 +186,8 @@
 		4915045117B12F5A002D1022 /* ayb_guiMod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_guiMod.h; sourceTree = "<group>"; };
 		49B15E4B17B15B2B00A4D8A4 /* ayb_settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_settings.cpp; sourceTree = "<group>"; };
 		49B15E4C17B15B2B00A4D8A4 /* ayb_settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_settings.h; sourceTree = "<group>"; };
+		49C2E26E17B29410002C8396 /* ayb_openNI2Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_openNI2Device.cpp; sourceTree = "<group>"; };
+		49C2E26F17B29410002C8396 /* ayb_openNI2Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_openNI2Device.h; sourceTree = "<group>"; };
 		57D168EF17B289CB0020DF75 /* ayb_kernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_kernel.cpp; sourceTree = "<group>"; };
 		57D168F017B289CB0020DF75 /* ayb_kernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_kernel.h; sourceTree = "<group>"; };
 		57D168F217B289D20020DF75 /* OpenNI2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenNI2.cpp; sourceTree = "<group>"; };
@@ -701,6 +704,8 @@
 				4915045017B12F5A002D1022 /* ayb_guiMod.cpp */,
 				49B15E4B17B15B2B00A4D8A4 /* ayb_settings.cpp */,
 				49B15E4C17B15B2B00A4D8A4 /* ayb_settings.h */,
+				49C2E26E17B29410002C8396 /* ayb_openNI2Device.cpp */,
+				49C2E26F17B29410002C8396 /* ayb_openNI2Device.h */,
 			);
 			name = "Augmented Blob";
 			sourceTree = "<group>";
@@ -2494,6 +2499,7 @@
 				49B15E4D17B15B2B00A4D8A4 /* ayb_settings.cpp in Sources */,
 				57D168F117B289CB0020DF75 /* ayb_kernel.cpp in Sources */,
 				57D168F317B289D20020DF75 /* OpenNI2.cpp in Sources */,
+				49C2E27017B29411002C8396 /* ayb_openNI2Device.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
