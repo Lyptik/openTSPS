@@ -1,0 +1,24 @@
+# Coding :
+
+- Fork the project on bitbucket (with the submodule)
+- Test this xml settings features
+- Automatic background substraction (background tab gui button and algo)
+	-> deactivate the other backghround stuff automatically ?
+- add a bypass Thresholding button
+- depth panel (between background and diffencing)
+	-> Add near and far clipping in background tab
+	-> test remapping stuff
+	-> ground detection
+	-> top / bottom / ... projection
+- Syphon tab in Communication panel
+	-> Syphon client for overlapping and mapping output
+	-> slider for crossfading
+
+# Roadmap :
+
+- Syphon server to make visuals, being able to do custom visual algorithms ?
+- Custom algorithms as plugins (depth descriptor for example)
+- New datas to send
+	-> custom data for algortihms (or way to plug)
+
+

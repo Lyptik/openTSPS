@@ -10,6 +10,7 @@
 		2E12CFF515F8168B00D5BC05 /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CFF315F8168B00D5BC05 /* Processor.cpp */; };
 		4915045217B12F5A002D1022 /* ayb_guiMod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4915045017B12F5A002D1022 /* ayb_guiMod.cpp */; };
 		49B15E4D17B15B2B00A4D8A4 /* ayb_settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49B15E4B17B15B2B00A4D8A4 /* ayb_settings.cpp */; };
+		570F9B6817B282450027F7F5 /* ayb_kernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 570F9B6717B282450027F7F5 /* ayb_kernel.cpp */; };
 		A92EE0C715FD288900C0A11B /* TSPSEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92EE0C615FD288900C0A11B /* TSPSEvents.cpp */; };
 		A9409A18174C32EF002BAAA0 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9409A04174C32EF002BAAA0 /* Syphon.framework */; };
 		A9409A19174C32EF002BAAA0 /* SyphonNameboundClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A9409A07174C32EF002BAAA0 /* SyphonNameboundClient.m */; };
@@ -183,6 +184,8 @@
 		4915045117B12F5A002D1022 /* ayb_guiMod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_guiMod.h; sourceTree = "<group>"; };
 		49B15E4B17B15B2B00A4D8A4 /* ayb_settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_settings.cpp; sourceTree = "<group>"; };
 		49B15E4C17B15B2B00A4D8A4 /* ayb_settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_settings.h; sourceTree = "<group>"; };
+		570F9B6617B2822E0027F7F5 /* ayb_kernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_kernel.h; sourceTree = "<group>"; };
+		570F9B6717B282450027F7F5 /* ayb_kernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_kernel.cpp; sourceTree = "<group>"; };
 		A92EE0C515FD287400C0A11B /* TSPSEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPSEvents.h; sourceTree = "<group>"; };
 		A92EE0C615FD288900C0A11B /* TSPSEvents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TSPSEvents.cpp; sourceTree = "<group>"; };
 		A94099EE174C32EF002BAAA0 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -694,6 +697,8 @@
 				49B15E4B17B15B2B00A4D8A4 /* ayb_settings.cpp */,
 				49B15E4C17B15B2B00A4D8A4 /* ayb_settings.h */,
 				4915045017B12F5A002D1022 /* ayb_guiMod.cpp */,
+				570F9B6617B2822E0027F7F5 /* ayb_kernel.h */,
+				570F9B6717B282450027F7F5 /* ayb_kernel.cpp */,
 			);
 			name = "Augmented Blob";
 			sourceTree = "<group>";
@@ -2484,6 +2489,7 @@
 				A9DE18241799DBB0000FE2BA /* ofxNiTE2.cpp in Sources */,
 				4915045217B12F5A002D1022 /* ayb_guiMod.cpp in Sources */,
 				49B15E4D17B15B2B00A4D8A4 /* ayb_settings.cpp in Sources */,
+				570F9B6817B282450027F7F5 /* ayb_kernel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

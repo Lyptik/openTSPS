@@ -69,6 +69,9 @@
 #include "ofxTSPS/communication/TUIOSender.h"
 #include "ofxTSPS/communication/WebSocketSender.h"
 
+// AYB stuff
+#include "ayb_kernel.h"
+
 namespace ofxTSPS {
 
     // TSPS Manager class
@@ -298,6 +301,9 @@ namespace ofxTSPS {
             ofxTSPS::View bgView;
             ofxTSPS::View processedView;
             ofxTSPS::View dataView;
+        
+            // AYB dav : added our object
+            AYB_kernel m_aybKernel;
         
         private:
             bool hasMouseEvents;

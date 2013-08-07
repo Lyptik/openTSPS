@@ -185,10 +185,21 @@ namespace ofxTSPS {
         
         // 3: Video File?
         } else if ( useVideoFile() && (currentSource == NULL || currentSource->getType() != CAMERA_VIDEOFILE) ){
-            setupSource( CAMERA_VIDEOFILE );
-        // 3.5: New video file?
+            
+            // AYB dav : condition to check if ONI sequence
+            if (m_aybKernel.isOniSequence(getVideoFile()))
+                setupSource(ONI_SEQUENCE);
+            else
+                setupSource(CAMERA_VIDEOFILE);
+
+            // 3.5: New video file?
         } else if ( useVideoFile() && currentSource->getType() == CAMERA_VIDEOFILE && getVideoFile() != currentSource->getCustomData() ){
-            setupSource( CAMERA_VIDEOFILE );
+            
+            // AYB dav : condition to check if ONI sequence
+            if (m_aybKernel.isOniSequence(getVideoFile()))
+                setupSource(ONI_SEQUENCE);
+            else
+                setupSource( CAMERA_VIDEOFILE );
         }
 #ifdef TARGET_OSX
         // 4 syphon
@@ -491,7 +502,7 @@ namespace ofxTSPS {
             case CAMERA_SYPHON:
                 currentSource = new Syphon();
                 break;
-#endif
+#endif                
             default:
                 break;
         }

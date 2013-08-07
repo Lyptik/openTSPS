@@ -37,7 +37,9 @@ namespace ofxTSPS {
         CAMERA_KINECT,
         CAMERA_SYPHON,
         CAMERA_CUSTOM,
-        CAMERA_UNDEFINED
+        CAMERA_UNDEFINED,
+        // AYB Dav : Added ONI sequence
+        ONI_SEQUENCE
     };
     
     //layout vars
