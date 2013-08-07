@@ -1,6 +1,5 @@
 # Coding :
 
-- Test this xml settings features
 - Automatic background substraction (background tab gui button and algo)
 	-> deactivate the other backghround stuff automatically ?
 - add a bypass Thresholding button
@@ -12,6 +11,7 @@
 - Syphon tab in Communication panel
 	-> Syphon client for overlapping and mapping output
 	-> slider for crossfading
+- Find a way to switch to live again -> works but really rarely !
 
 # Roadmap :
 

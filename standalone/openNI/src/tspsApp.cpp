@@ -7,7 +7,7 @@ tspsApp::tspsApp( int numCameras ){
         delegates.push_back( new ofxTSPS::Delegate(i) );
         delegates.back()->disableEvents();
         
-        sources.push_back( new ofxTSPS::OpenNI2() );
+        //sources.push_back( new ofxTSPS::OpenNI2() );
     }
 }
 
@@ -28,10 +28,10 @@ void tspsApp::setup(){
     
     for ( int i=0; i<delegates.size(); i++){
         delegates[i]->setup();
-        delegates[i]->getPeopleTracker()->setSource(*sources[i]);
+        //delegates[i]->getPeopleTracker()->setSource(*sources[i]);
         
         // setup OpenNI source
-        sources[i]->openSource(320,240);
+        //sources[i]->openSource(320,240);
         
         string name = "C:"+ofToString( i+1 );
         guiTypeButton * btn = new guiTypeButton();
@@ -55,7 +55,7 @@ void tspsApp::setup(){
 //--------------------------------------------------------------
 void tspsApp::update(){
     for (int i=0; i<delegates.size(); i++){
-        sources[i]->update();
+        //sources[i]->update();
         delegates[i]->update();
     }
 }

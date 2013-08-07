@@ -207,7 +207,10 @@ namespace ofxTSPS {
             setupSource( CAMERA_SYPHON );
         }
 #endif
-        
+        // ayb dav : 5 custom source
+        else if (useCustomSource() && (currentSource == NULL || currentSource->getType() != CAMERA_CUSTOM)) {
+            setupSource(CAMERA_CUSTOM);
+        }
         // update source
         bool bNewFrame = false;
         if ( currentSource != NULL && currentSource->isOpen() ){
@@ -541,7 +544,7 @@ namespace ofxTSPS {
             // ayb dav : ONI_SEQUENCE case
             case ONI_SEQUENCE:
                 setUseVideoFile();
-                break;
+                break;    
             default:
                 break;
         }
