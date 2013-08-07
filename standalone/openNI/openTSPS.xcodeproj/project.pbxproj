@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2E12CFF515F8168B00D5BC05 /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CFF315F8168B00D5BC05 /* Processor.cpp */; };
-		49C2E27017B29411002C8396 /* ayb_openNI2Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49C2E26E17B29410002C8396 /* ayb_openNI2Device.cpp */; };
 		5791538717B2A623001BDC73 /* ayb_guiMod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538117B2A623001BDC73 /* ayb_guiMod.cpp */; };
 		5791538817B2A623001BDC73 /* ayb_kernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538317B2A623001BDC73 /* ayb_kernel.cpp */; };
 		5791538917B2A623001BDC73 /* ayb_settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538517B2A623001BDC73 /* ayb_settings.cpp */; };
@@ -185,8 +184,6 @@
 
 /* Begin PBXFileReference section */
 		2E12CFF315F8168B00D5BC05 /* Processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Processor.cpp; sourceTree = "<group>"; };
-		49C2E26E17B29410002C8396 /* ayb_openNI2Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_openNI2Device.cpp; sourceTree = "<group>"; };
-		49C2E26F17B29410002C8396 /* ayb_openNI2Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_openNI2Device.h; sourceTree = "<group>"; };
 		5791538117B2A623001BDC73 /* ayb_guiMod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_guiMod.cpp; sourceTree = "<group>"; };
 		5791538217B2A623001BDC73 /* ayb_guiMod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_guiMod.h; sourceTree = "<group>"; };
 		5791538317B2A623001BDC73 /* ayb_kernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_kernel.cpp; sourceTree = "<group>"; };
@@ -702,15 +699,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4915045317B12F60002D1022 /* Augmented Blob */ = {
-			isa = PBXGroup;
-			children = (
-				49C2E26E17B29410002C8396 /* ayb_openNI2Device.cpp */,
-				49C2E26F17B29410002C8396 /* ayb_openNI2Device.h */,
-			);
-			name = "Augmented Blob";
-			sourceTree = "<group>";
-		};
 		A94099ED174C32EF002BAAA0 /* ofxSyphon */ = {
 			isa = PBXGroup;
 			children = (
@@ -2304,7 +2292,6 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				4915045317B12F60002D1022 /* Augmented Blob */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				A948586315C470BC00761D1C /* tspsApp.h */,
 				A948586215C470BC00761D1C /* tspsApp.cpp */,
@@ -2509,7 +2496,6 @@
 				A9DE18231799DBB0000FE2BA /* ofxNI2.cpp in Sources */,
 				A9DE18241799DBB0000FE2BA /* ofxNiTE2.cpp in Sources */,
 				57D168F317B289D20020DF75 /* OpenNI2.cpp in Sources */,
-				49C2E27017B29411002C8396 /* ayb_openNI2Device.cpp in Sources */,
 				5791538717B2A623001BDC73 /* ayb_guiMod.cpp in Sources */,
 				5791538817B2A623001BDC73 /* ayb_kernel.cpp in Sources */,
 				5791538917B2A623001BDC73 /* ayb_settings.cpp in Sources */,

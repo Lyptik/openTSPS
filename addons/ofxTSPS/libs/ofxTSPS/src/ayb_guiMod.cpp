@@ -14,25 +14,26 @@
 AYB_guiMod::AYB_guiMod(){
     //Constructor
     
-    
-#ifdef _LIBCPP_VERSION
-    std::cout << "Using libc++\n";
-#else
-    std::cout << "Using libstdc++\n";
-#endif
-#ifdef __GXX_EXPERIMENTAL_CXX0X__
-#if __cplusplus == 1
-    std::cout << "Language mode = gnu++11\n";
-#else
-    std::cout << "Language mode = c++11\n";
-#endif
-#else
-#if __cplusplus == 1
-    std::cout << "Language mode = gnu++98\n";
-#else
-    std::cout << "Language mode = c++98\n";
-#endif
-#endif
+    // Prints out some debugging info about compiler defaults
+    // Can be removed
+    #ifdef _LIBCPP_VERSION
+        std::cout << "Using libc++\n";
+    #else
+        std::cout << "Using libstdc++\n";
+    #endif
+    #ifdef __GXX_EXPERIMENTAL_CXX0X__
+    #if __cplusplus == 1
+        std::cout << "Language mode = gnu++11\n";
+    #else
+        std::cout << "Language mode = c++11\n";
+    #endif
+    #else
+    #if __cplusplus == 1
+        std::cout << "Language mode = gnu++98\n";
+    #else
+        std::cout << "Language mode = c++98\n";
+    #endif
+    #endif
 }
 
 
@@ -59,8 +60,8 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
         clippingGroup->seBaseColor(244,136,136);
         clippingGroup->setShowText(false);
         panel.addToggle("Depth Clipping", "AYB_DEPTHCLIP_APPLY", false);
-        panel.addSlider("Near:", "AYB_DEPTHCLIP_NEAR", 1, 1, 100, true);
-        panel.addSlider("Far:", "AYB_DEPTHCLIP_FAR", 1, 1, 100, true);
+        panel.addSlider("Near:", "AYB_DEPTHCLIP_NEAR", 1, 1, 1000, true);
+        panel.addSlider("Far:", "AYB_DEPTHCLIP_FAR", 1, 1, 1000, true);
     
     
         // SENSING:BACKGROUND Tab
@@ -199,16 +200,34 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
         panel.setValueB("AYB_DETECT_GROUND", false);
     }
     
-    
     // OPTION: DEPTH CLIPPING
+    //FIXME: These shouldn't be hardcoded
+    int default_near = 1;
+    int default_far = 1000;
+    
     // Make sure depth clipping is in reasonable range
-    if (panel.getValueF("AYB_DEPTHCLIP_FAR")< panel.getValueF("AYB_DEPTHCLIP_NEAR") ){
-        panel.setValueF("AYB_DEPTHCLIP_FAR", (panel.getValueF("AYB_DEPTHCLIP_NEAR")+1.0));
+    if (panel.getValueI("AYB_DEPTHCLIP_FAR")<= 0 || panel.getValueI("AYB_DEPTHCLIP_NEAR") <= 0 ){
+        panel.setValueI("AYB_DEPTHCLIP_NEAR", default_near);
+        panel.setValueI("AYB_DEPTHCLIP_FAR", default_far);
+
     }
+    if (panel.getValueI("AYB_DEPTHCLIP_FAR")<= panel.getValueI("AYB_DEPTHCLIP_NEAR") ){
+        panel.setValueI("AYB_DEPTHCLIP_FAR", (panel.getValueI("AYB_DEPTHCLIP_NEAR")+1.0));
+    }
+    
+    if (panel.getValueI("AYB_DEPTHCLIP_NEAR")>= panel.getValueI("AYB_DEPTHCLIP_FAR") ){
+        panel.setValueI("AYB_DEPTHCLIP_NEAR", (panel.getValueI("AYB_DEPTHCLIP_NEAR")-1.0));
+    }
+
+    
     // Apply Depth clipping option
-    if (panel.getValueB("AYB_DEPTHCLIP_APPLY")){
-        //settings.clipNear=
+    if (!panel.getValueB("AYB_DEPTHCLIP_APPLY")){
+        panel.setValueI("AYB_DEPTHCLIP_NEAR", default_near);
+        panel.setValueI("AYB_DEPTHCLIP_FAR", default_far);
     }
+    
+    settings.ayb_Settings.clip_near=panel.getValueI("AYB_DEPTHCLIP_NEAR");
+    settings.ayb_Settings.clip_far=panel.getValueI("AYB_DEPTHCLIP_FAR");
     
  
     // OPTION: BACKGROUND SUBTRACT

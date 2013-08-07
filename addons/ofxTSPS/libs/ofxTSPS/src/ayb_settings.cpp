@@ -7,3 +7,9 @@
 //
 
 #include "ayb_settings.h"
+
+// Constructor
+AYB_settings::AYB_settings(){
+    clip_near=1;
+    clip_far=1000;
+}

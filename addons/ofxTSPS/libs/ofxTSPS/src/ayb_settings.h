@@ -11,4 +11,14 @@
 
 #include <iostream>
 
+
+
+class AYB_settings {
+    public:
+        AYB_settings();
+        int clip_near;
+        int clip_far;
+
+};
+
 #endif /* defined(__openTSPS__ayb_settings__) */

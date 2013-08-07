@@ -11,7 +11,6 @@
 
 #include "ofxTSPS/source/Source.h"
 #include "ofxNI2.h"
-#include "ayb_openNI2Device.h"
 
 namespace ofxTSPS {
     class OpenNI2 : public Source, public ofxNI2::DepthStream {
@@ -20,6 +19,8 @@ namespace ofxTSPS {
         OpenNI2();
         ~OpenNI2();
         
+        ofxTSPS::SourceType getType();
+
         bool available();
         void update();
         
@@ -35,14 +36,14 @@ namespace ofxTSPS {
         void closeSource();
         
         // Be careful, might be null!
-        Ayb_openNI2Device * getDevice();
+        ofxNI2::Device * getDevice();
         
         void setNearClipping( int near );
         
         void setFarClipping( int far );
         
     private:
-        Ayb_openNI2Device *device;
+        ofxNI2::Device *device;
         bool bDepthSetup, bDoProcessFrame;
         int nearClipping, farClipping;
     };

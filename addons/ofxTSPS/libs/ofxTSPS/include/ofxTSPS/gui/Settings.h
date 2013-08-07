@@ -36,6 +36,7 @@
 #include "ofMain.h"
 #include "ofxTSPS/Constants.h"
 #include "ofxTSPS/source/Source.h"
+#include "ayb_settings.h"
 
 namespace ofxTSPS {
     class Settings {
@@ -141,6 +142,9 @@ namespace ofxTSPS {
         vector <string> xmlFiles;
         string currentXmlFile;
         SourceType      inputType;
+        
+        // AYB: Our settings
+        AYB_settings ayb_Settings;
         
         
     private:

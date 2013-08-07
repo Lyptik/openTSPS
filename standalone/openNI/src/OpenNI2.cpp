@@ -19,6 +19,12 @@ ofxTSPS::OpenNI2::OpenNI2(){
     farClipping = -1; // will be reset to max value
 }
 
+
+
+ofxTSPS::SourceType ofxTSPS::OpenNI2::getType(){
+    return CAMERA_CUSTOM;
+}
+
 // Destructor
 ofxTSPS::OpenNI2::~OpenNI2(){
     device->exit();
@@ -28,7 +34,7 @@ ofxTSPS::OpenNI2::~OpenNI2(){
 // Return availble device (tries to initialize one if we call this before init, which you shouldn't do)
 bool ofxTSPS::OpenNI2::available(){
     if ( device == NULL ){
-        device = new Ayb_openNI2Device;
+        device = new ofxNI2::Device;
         device->setup();
     }
     return (device->listDevices() >= 1);
@@ -68,21 +74,21 @@ bool ofxTSPS::OpenNI2::doProcessFrame(){
 
 // Convert depthmap value to range
 inline void ofxTSPS::OpenNI2::depthRemapToRange(const ofShortPixels &src, ofPixels &dst, int near, int far, int invert){
-    int N = src.getWidth() * src.getHeight();
-    dst.allocate(src.getWidth(), src.getHeight(), 1);
     
-    const unsigned short *src_ptr = src.getPixels();
-    unsigned char *dst_ptr = dst.getPixels();
-    
-    //            float inv_range = 1. / (far - near);
-    
+    // If invert, then we swap near and far
+    // Why? Who knows... we always call it with FALSE
     if (invert)
         std::swap(near, far);
     
-    for (int i = 0; i < N; i++)
-    {
+    // Iterate over source and create destination
+    dst.allocate(src.getWidth(), src.getHeight(), 1);
+    const unsigned short *src_ptr = src.getPixels();
+    unsigned char *dst_ptr = dst.getPixels();
+    
+    // Linear array of pixels (W x H)
+    for (int i=0; i<(src.getWidth()*src.getHeight()); i++){
         unsigned short C = *src_ptr;
-        *dst_ptr = C == 0 ? 0 : ofMap(C, near, far, 0, 255, true);
+        *dst_ptr = C==0? 0 : ofMap(C, near, far, 0, 255, true);
         src_ptr++;
         dst_ptr++;
     }
@@ -93,7 +99,7 @@ bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
     
     // Initialize if device is null
     if ( device == NULL ){
-        device = new Ayb_openNI2Device;
+        device = new ofxNI2::Device;
         if(etc == "")
             device->setup();
         else
@@ -138,7 +144,7 @@ void ofxTSPS::OpenNI2::closeSource(){
 }
 
 // Return the device handle (fail if it isn't initialized)
-ofxTSPS::Ayb_openNI2Device * ofxTSPS::OpenNI2::getDevice(){
+ofxNI2::Device * ofxTSPS::OpenNI2::getDevice(){
     if (device == NULL){
         ofLogError("OpenNI2") << "Cannot return device handle, device not initialized!";
         throw;

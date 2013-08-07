@@ -1,4 +1,5 @@
 #include "ofxTSPS/PeopleTracker.h"
+#include "OpenNI2.h"
 
 //scales down tracking images for improved performance
 #define TRACKING_SCALE_FACTOR .5
@@ -192,7 +193,7 @@ namespace ofxTSPS {
             else
                 setupSource(CAMERA_VIDEOFILE);
 
-            // 3.5: New video file?
+        // 3.5: New video file?
         } else if ( useVideoFile() && currentSource->getType() == CAMERA_VIDEOFILE && getVideoFile() != currentSource->getCustomData() ){
             
             // AYB dav : condition to check if ONI sequence
@@ -201,6 +202,7 @@ namespace ofxTSPS {
             else
                 setupSource( CAMERA_VIDEOFILE );
         }
+
 #ifdef TARGET_OSX
         // 4 syphon
         else if ( useSyphon() && (currentSource == NULL || currentSource->getType() != CAMERA_SYPHON) ){
@@ -218,7 +220,17 @@ namespace ofxTSPS {
             bNewFrame = currentSource->doProcessFrame();
         }
         
+        // Get frame
         if ( bNewFrame ){
+            
+            // AYB: For custom set the clipping
+            // Totally non-obvious, but this is used by getPixeslRef()
+            if (currentSource->getType() == CAMERA_CUSTOM){
+                ((OpenNI2*)currentSource)->setNearClipping(p_Settings->ayb_Settings.clip_near);
+                ((OpenNI2*)currentSource)->setFarClipping(p_Settings->ayb_Settings.clip_far);
+            }
+                        
+            // Get frame
             ofImageType currentType = currentSource->getPixelsRef().getImageType();
             if ( currentType != OF_IMAGE_GRAYSCALE ){
                 // TO-DO: this should probably be in the Processor
@@ -464,9 +476,9 @@ namespace ofxTSPS {
                 setUseVideoGrabber();
                 break;
             case CAMERA_SYPHON:
-#ifdef TARGET_OSX
+                #ifdef TARGET_OSX
                 setUseSyphon();
-#endif
+                #endif
                 break;
             case CAMERA_CUSTOM:
                 setUseCustomSource();
@@ -477,6 +489,7 @@ namespace ofxTSPS {
                 break;
             case CAMERA_UNDEFINED:
                 break;
+           
         }
         
         if (p_Settings == NULL) p_Settings = gui.getSettings();
@@ -505,6 +518,7 @@ namespace ofxTSPS {
                 }
                 currentSource = new VideoFile();
                 break;
+
 #ifdef TARGET_OSX
             case CAMERA_SYPHON:
                 currentSource = new Syphon();
@@ -521,6 +535,7 @@ namespace ofxTSPS {
                 }
                 currentSource = new ofxTSPS::OpenNI2();
                 break;
+
             default:
                 break;
         }
