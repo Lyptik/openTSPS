@@ -101,11 +101,11 @@ bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
     
     //openni::Device thisDevice = device->get();
     
-    cout << this->device->device.m_device;
-    cout << this->device->get().m_device;
+    //cout << this->device->device.m_device;
+    //cout << this->device->get().m_device;
     
     
-    if ( == NULL){
+    if ( device == NULL){
          cout << "OpenNI2: Cannot locate suitable device - is hardware plugged in?";
         return false;
         

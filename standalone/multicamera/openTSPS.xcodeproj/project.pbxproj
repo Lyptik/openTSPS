@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2E12CFF515F8168B00D5BC05 /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CFF315F8168B00D5BC05 /* Processor.cpp */; };
+		5791539117B2A662001BDC73 /* ayb_guiMod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538B17B2A662001BDC73 /* ayb_guiMod.cpp */; };
+		5791539217B2A662001BDC73 /* ayb_kernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538D17B2A662001BDC73 /* ayb_kernel.cpp */; };
+		5791539317B2A662001BDC73 /* ayb_settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538F17B2A662001BDC73 /* ayb_settings.cpp */; };
 		57ED841417B0F6D5008638C9 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A98F0B8D174E6F9E003ABBC2 /* Syphon.framework */; };
 		A92EE0CE15FD28AE00C0A11B /* TSPSEvents.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A92EE0CD15FD28AE00C0A11B /* TSPSEvents.cpp */; };
 		A948586415C470BD00761D1C /* tspsApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A948586215C470BC00761D1C /* tspsApp.cpp */; };
@@ -155,6 +158,12 @@
 
 /* Begin PBXFileReference section */
 		2E12CFF315F8168B00D5BC05 /* Processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Processor.cpp; sourceTree = "<group>"; };
+		5791538B17B2A662001BDC73 /* ayb_guiMod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_guiMod.cpp; sourceTree = "<group>"; };
+		5791538C17B2A662001BDC73 /* ayb_guiMod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_guiMod.h; sourceTree = "<group>"; };
+		5791538D17B2A662001BDC73 /* ayb_kernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_kernel.cpp; sourceTree = "<group>"; };
+		5791538E17B2A662001BDC73 /* ayb_kernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_kernel.h; sourceTree = "<group>"; };
+		5791538F17B2A662001BDC73 /* ayb_settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_settings.cpp; sourceTree = "<group>"; };
+		5791539017B2A662001BDC73 /* ayb_settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_settings.h; sourceTree = "<group>"; };
 		A92EE0CD15FD28AE00C0A11B /* TSPSEvents.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TSPSEvents.cpp; sourceTree = "<group>"; };
 		A92EE0CF15FD28B400C0A11B /* TSPSEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSPSEvents.h; sourceTree = "<group>"; };
 		A948586215C470BC00761D1C /* tspsApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tspsApp.cpp; sourceTree = "<group>"; };
@@ -1578,6 +1587,12 @@
 		A9485E2E15C4712A00761D1C /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5791538B17B2A662001BDC73 /* ayb_guiMod.cpp */,
+				5791538C17B2A662001BDC73 /* ayb_guiMod.h */,
+				5791538D17B2A662001BDC73 /* ayb_kernel.cpp */,
+				5791538E17B2A662001BDC73 /* ayb_kernel.h */,
+				5791538F17B2A662001BDC73 /* ayb_settings.cpp */,
+				5791539017B2A662001BDC73 /* ayb_settings.h */,
 				A974234816A4CC3800BC6910 /* SpacebrewSender.cpp */,
 				A9485E2F15C4712A00761D1C /* CvPerson.cpp */,
 				A9485E3015C4712A00761D1C /* CvProcessor.cpp */,
@@ -2194,6 +2209,9 @@
 				A9DE15D51799CFB7000FE2BA /* registration.c in Sources */,
 				A9DE15D61799CFB7000FE2BA /* tilt.c in Sources */,
 				A9DE15D71799CFB7000FE2BA /* usb_libusb10.c in Sources */,
+				5791539117B2A662001BDC73 /* ayb_guiMod.cpp in Sources */,
+				5791539217B2A662001BDC73 /* ayb_kernel.cpp in Sources */,
+				5791539317B2A662001BDC73 /* ayb_settings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
