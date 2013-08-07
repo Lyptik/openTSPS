@@ -57,11 +57,16 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
     
         // SENSING:DEPTH Tab
         ///////////////////////////////////////////////////////////////
+        /*
+         
+        FIXME: This insert is in the TSPS gui code, but I prefer it not to be
+         
         // Add new tab
         guiTypePanel * depthPanel = panel.addPanel("depth", 1, false);
         depthPanel->setDrawLock( false );
         depthPanel->setBackgroundColor(123,191,174);
         depthPanel->setBackgroundSelectColor(123,191,174);
+         */
         
         // Add options 
         panel.setWhichPanel("depth");
@@ -105,12 +110,18 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
         panel.addSlider("Option:", "AYB_ALGO2_OPTION", 1, 1, 100, true);
 
         
-        
+        /*
+         This doesn't work. Injecting the panel manually for now
+         inside GuiManager.cpp, ugh
+         
+         Note: it doesn't work because panel.add is the determinant
+         
         // Make sure the depth tab is in third place
         std::vector<guiTypePanel *>::iterator it;
         it = panelGroups["sensing"].begin();
         it+=2;
         panelGroups["sensing"].insert(it, depthPanel);
+         */
         
     }
     

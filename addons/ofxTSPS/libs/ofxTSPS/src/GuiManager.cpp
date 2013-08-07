@@ -173,11 +173,11 @@ namespace ofxTSPS {
         vector<string>source_types;
         source_types.push_back("Web Camera");
         source_types.push_back("Video File");
-        source_types.push_back("Kinect");
+        source_types.push_back("Kinect (libfreenect)");
 #ifdef TARGET_OSX
         source_types.push_back("Syphon");
 #endif
-        source_types.push_back("custom");
+        source_types.push_back("Custom (OpenNI2)");
         
         panel.addMultiToggle("source type", "SOURCE_TYPE", 0, source_types);
         
@@ -222,6 +222,17 @@ namespace ofxTSPS {
         backgroundPanel->setDrawLock( false );	
         backgroundPanel->setBackgroundColor(213,105,68);
         backgroundPanel->setBackgroundSelectColor(213,105,68);
+        
+        ////
+        // AYB_NOTE: FIXME: I would prefer this to be inside the "inject gui" code
+        // But the addPanel order matters and I can't figure out how to reorder
+        // also I'm tired of dealing with this GUI code
+        guiTypePanel * depthPanel = panel.addPanel("depth", 1, false);
+        depthPanel->setDrawLock( false );
+        depthPanel->setBackgroundColor(123,191,174);
+        depthPanel->setBackgroundSelectColor(123,191,174);
+        panelGroups["sensing"].push_back(depthPanel);
+        ///
         
         guiTypePanel * differencingPanel = panel.addPanel("differencing", 1, false);
         differencingPanel->setDrawLock( false );
