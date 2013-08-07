@@ -1,12 +1,11 @@
 # Coding :
 
-- Fork the project on bitbucket (with the submodule)
 - Test this xml settings features
 - Automatic background substraction (background tab gui button and algo)
 	-> deactivate the other backghround stuff automatically ?
 - add a bypass Thresholding button
 - depth panel (between background and diffencing)
-	-> Add near and far clipping in background tab
+	-> Add near and far clipping in background tab (after projection)
 	-> test remapping stuff
 	-> ground detection
 	-> top / bottom / ... projection
