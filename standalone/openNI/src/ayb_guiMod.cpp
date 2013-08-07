@@ -13,6 +13,26 @@
 
 AYB_guiMod::AYB_guiMod(){
     //Constructor
+    
+    
+#ifdef _LIBCPP_VERSION
+    std::cout << "Using libc++\n";
+#else
+    std::cout << "Using libstdc++\n";
+#endif
+#ifdef __GXX_EXPERIMENTAL_CXX0X__
+#if __cplusplus == 1
+    std::cout << "Language mode = gnu++11\n";
+#else
+    std::cout << "Language mode = c++11\n";
+#endif
+#else
+#if __cplusplus == 1
+    std::cout << "Language mode = gnu++98\n";
+#else
+    std::cout << "Language mode = c++98\n";
+#endif
+#endif
 }
 
 
