@@ -58,7 +58,7 @@
 #include "ofxTSPS/Processor.h"
 //#include "ofxTSPS/opencv/OpenCvProcessor.h" // R.I.P.
 #include "ofxTSPS/cv/CvProcessor.h"
-#include "ayb_processor2.h" // ayb dav : add custom processor
+#include "ayb_processor.h" // ayb dav : add custom processor
 
 // gui + settings
 #include "ofxTSPS/gui/Settings.h"

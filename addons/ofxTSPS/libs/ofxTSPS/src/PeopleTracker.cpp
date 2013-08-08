@@ -154,7 +154,7 @@ namespace ofxTSPS {
         
         // setup default processor
         if ( tspsProcessor == NULL ){
-            setProcessor( new AYB_processor2); // ayb dav : replace with custom processor
+            setProcessor( new AYB_processor); // ayb dav : replace with custom processor
         }
         tspsProcessor->setup( width, height, this );
         
@@ -900,8 +900,7 @@ namespace ofxTSPS {
         
         // ayb dav : auto background
         if(p_Settings->ayb_Settings.toggle_autoBg){
-            //((*AYB_processor2)tspsProcessor)->foobar();
-            // TODO
+            ((AYB_processor*)tspsProcessor)->autoDepthBackground(warpedImage);
         }
         
         // black out background?
