@@ -42,7 +42,8 @@ AYB_guiMod::AYB_guiMod(){
 // Injects some changes to the GUI
 void AYB_guiMod::injectGUI(ofxLabGui& panel,
                            map<string, vector<guiTypePanel *> >& panelGroups,
-                           vector<string>& source_types){
+                           vector<string>& source_types,
+                           ofxTSPS::Settings &settings){
     
     
     
@@ -60,8 +61,8 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
         clippingGroup->seBaseColor(244,136,136);
         clippingGroup->setShowText(false);
         panel.addToggle("Depth Clipping", "AYB_DEPTHCLIP_APPLY", false);
-        panel.addSlider("Near:", "AYB_DEPTHCLIP_NEAR", 1, 1, 1000, true);
-        panel.addSlider("Far:", "AYB_DEPTHCLIP_FAR", 1, 1, 1000, true);
+        panel.addSlider("Near:", "AYB_DEPTHCLIP_NEAR", 1, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
+        panel.addSlider("Far:", "AYB_DEPTHCLIP_FAR", 1, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
     
     
         // SENSING:BACKGROUND Tab
@@ -201,14 +202,11 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     }
     
     // OPTION: DEPTH CLIPPING
-    //FIXME: These shouldn't be hardcoded
-    int default_near = 1;
-    int default_far = 1000;
-    
+
     // Make sure depth clipping is in reasonable range
     if (panel.getValueI("AYB_DEPTHCLIP_FAR")<= 0 || panel.getValueI("AYB_DEPTHCLIP_NEAR") <= 0 ){
-        panel.setValueI("AYB_DEPTHCLIP_NEAR", default_near);
-        panel.setValueI("AYB_DEPTHCLIP_FAR", default_far);
+        panel.setValueI("AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible);
+        panel.setValueI("AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible);
 
     }
     if (panel.getValueI("AYB_DEPTHCLIP_FAR")<= panel.getValueI("AYB_DEPTHCLIP_NEAR") ){
@@ -222,8 +220,8 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     
     // Apply Depth clipping option
     if (!panel.getValueB("AYB_DEPTHCLIP_APPLY")){
-        panel.setValueI("AYB_DEPTHCLIP_NEAR", default_near);
-        panel.setValueI("AYB_DEPTHCLIP_FAR", default_far);
+        panel.setValueI("AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible);
+        panel.setValueI("AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible);
     }
     
     settings.ayb_Settings.clip_near=panel.getValueI("AYB_DEPTHCLIP_NEAR");

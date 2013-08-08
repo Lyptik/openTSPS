@@ -23,7 +23,8 @@ class AYB_guiMod{
         // Inject changes to the GUI (called from setup)
         void injectGUI(ofxLabGui& panel,
                        map<string, vector<guiTypePanel *> >& panelGroups,
-                       vector<string>& source_types);
+                       vector<string>& source_types,
+                       ofxTSPS::Settings &settings);
 
         // Process the GUI based on our changes (called from update)
         void processGUIUpdates(ofxLabGui &panel,

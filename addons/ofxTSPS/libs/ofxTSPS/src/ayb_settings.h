@@ -18,6 +18,8 @@ class AYB_settings {
         AYB_settings();
         int clip_near;
         int clip_far;
+        int clip_max_possible;
+        int clip_min_possible;
 
 };
 

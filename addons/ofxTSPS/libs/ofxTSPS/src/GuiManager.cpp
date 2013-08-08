@@ -497,8 +497,8 @@ namespace ofxTSPS {
         
         // end setup data panel
         
-        
-        ayb_guiMod.injectGUI(panel,panelGroups,source_types);
+        // Inject some GUI changes
+        ayb_guiMod.injectGUI(panel,panelGroups,source_types,settings);
         
         // END setup, cleanup...
         //listen for save / load / reload / saveas events from GUI + pass to quadgui
