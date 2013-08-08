@@ -64,7 +64,6 @@ ofPixels & ofxTSPS::OpenNI2::getPixelsRef(){
     return retPix;
 }
 
-
 // Per frame
 bool ofxTSPS::OpenNI2::doProcessFrame(){
     bool bReturn = bDoProcessFrame;
@@ -125,7 +124,7 @@ bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
          cout << "OpenNI2: Cannot locate suitable device - is hardware plugged in?";
         return false;
         
-    // Init okay, make sure we attach device (do this once)g
+    // Init okay, make sure we attach device (do this once)
     }else{
         
         if ( !bDepthSetup ){

@@ -3,14 +3,13 @@
 - Automatic background substraction (background tab gui button and algo)
 	-> deactivate the other backghround stuff automatically ?
 - depth panel (between background and diffencing)
-	-> Add near and far clipping in background tab (after projection)
-	-> test remapping stuff
 	-> ground detection
 	-> top / bottom / ... projection
+    -> Add remapping option (after projection)
 - Syphon tab in Communication panel
 	-> Syphon client for overlapping and mapping output
 	-> slider for crossfading
-- Detecting the pool table and the holes ! -> sending them by Osc
+- ADding a Pool panel in data -> Detecting the pool table and the holes ! -> sending them by Osc
 - Find a way to switch to live again -> works but really rarely !
 
 # Roadmap :
@@ -19,5 +18,5 @@
 - Custom algorithms as plugins (depth descriptor for example)
 - New datas to send
 	-> custom data for algortihms (or way to plug)
-
-
+- Adding masks
+- 

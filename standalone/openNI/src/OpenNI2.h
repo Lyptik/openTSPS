@@ -27,6 +27,10 @@ namespace ofxTSPS {
         unsigned char * getPixels();
         
         ofPixels & getPixelsRef();
+        
+        // ayb dav : added access to 13bits depth maps
+        inline ofShortPixels& getDepthPixelsRef() {return ofxNI2::DepthStream::getPixelsRef();}
+
         bool doProcessFrame();
         
         // fixed invert...
