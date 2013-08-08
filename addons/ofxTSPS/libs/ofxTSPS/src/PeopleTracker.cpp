@@ -909,6 +909,42 @@ namespace ofxTSPS {
             backgroundImage.setFromPixels(blackPixels);
         }
         
+        
+        //-----------------------
+        // AYB Depth: Panel added to do depth work
+        //-----------------------
+        //Detect ground
+        if(p_Settings->ayb_Settings.apply_groundDetection){
+            
+        }
+        
+        //Projection
+        switch(p_Settings->ayb_Settings.projectionOption){
+            
+            case PROJ_NONE:
+                break;
+                
+            case PROJ_TOP:
+                break;
+                
+            case PROJ_BOTTOM:
+                break;
+                
+            case PROJ_LEFT:
+                break;
+                
+            case PROJ_RIGHT:
+                break;
+            
+        }
+        
+        // These should be replaced with the names of actual algorithms
+        //Algo 1
+        //Algo 2
+        
+        
+        
+        
         //-----------------------
         // Difference image
         //-----------------------

@@ -49,6 +49,7 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
     
     // Some options should only appear if we have a depth source
     // Currently we're not enabling this because "depth source" could be a syphon, for example
+    
     bool depthSource=true;
     if (depthSource){
         
@@ -106,6 +107,7 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
         projectionGroup->seBaseColor(180,87,128);
         projectionGroup->setShowText(false);
         vector<string> multi;
+        multi.push_back("none");
         multi.push_back("top");
         multi.push_back("bottom");
         multi.push_back("left");
@@ -170,44 +172,38 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
  }
 
 // Handle GUI updates (mutually exclusive options, ect)
-/*
-
- AYB_BGSUB_APPLY
- 
- AYB_DEPTHCLIP_APPLY
- AYB_DEPTHCLIP_NEAR
- AYB_DEPTHCLIP_FAR
- 
- AYB_PROJECTION_OPTION
- 
- AYB_DETECT_GROUND
- 
- AYB_ALGO1_APPLY
- AYB_ALGO1_OPTION
-
- AYB_ALGO2_APPLY
- AYB_ALGO2_OPTION
- 
- AYB_SYPHON_ON
- AYB_SYPHON_ALPHA
- AYB_SYPHON_OVERLAYSOURCE
- AYB_SYPHON_SERVERNAME
-
-*/
+// This is really a manual binding to settings, which is what we want to access
+// (see ayb_Settings.cpp for the values you want to use)
 void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings){
     
     
-    // BUTTON: Detect Ground
+    // MOMENTARY: Detect Ground
     if(panel.getValueB("AYB_DETECT_GROUND")){
         printf("*DETECT GROUND*");
         panel.setValueB("AYB_DETECT_GROUND", false);
     }
     
-    // BUTTON: Detect Ground
+    
+    // ON/OFF: Just pass these through
     settings.ayb_Settings.toggle_autoBg = panel.getValueB("AYB_BGSUB_APPLY");
+    settings.ayb_Settings.apply_groundDetection = panel.getValueB("AYB_DETECT_GROUND");
+    settings.ayb_Settings.syphon_on = panel.getValueB("AYB_SYPHON_ON");
+    
+    // ALGO 1 / ALGO 2: These are placeholders and should be replaced with real names before binding
+    
+    // Syphon
+    settings.ayb_Settings.syphon_on=panel.getValueB("AYB_SYPHON_ON");
+    settings.ayb_Settings.syphon_overlayAlpha=panel.getValueF("AYB_SYPHON_ALPHA");
+    settings.ayb_Settings.syphon_overlaySource=panel.getValueS("AYB_SYPHON_OVERLAYSOURCE");
+    settings.ayb_Settings.syphon_serverName=panel.getValueS("AYB_SYPHON_SERVERNAME");
+    
+    
+    //Projection option (see ayb_settings for enum type)
+    settings.ayb_Settings.projectionOption=(ayb_projectionType)panel.getValueI("AYB_PROJECTION_OPTION");
+    
+    
     
     // OPTION: DEPTH CLIPPING
-
     // Make sure depth clipping is in reasonable range
     if (panel.getValueI("AYB_DEPTHCLIP_FAR")<= 0 || panel.getValueI("AYB_DEPTHCLIP_NEAR") <= 0 ){
         panel.setValueI("AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible);
