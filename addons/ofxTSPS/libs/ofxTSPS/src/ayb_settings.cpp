@@ -10,7 +10,11 @@
 
 // Constructor
 AYB_settings::AYB_settings(){
-    clip_near=1;
-    clip_far=1000;
+
+    // Clipping settings
+    clip_max_possible=4000;
+    clip_min_possible=1;
+    clip_near=clip_min_possible;
+    clip_far=clip_max_possible;
     toggle_autoBg = false;
 }

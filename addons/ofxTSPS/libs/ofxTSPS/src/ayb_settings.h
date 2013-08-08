@@ -19,7 +19,8 @@ class AYB_settings {
         int clip_near;
         int clip_far;
         bool toggle_autoBg;
-
+        int clip_max_possible;
+        int clip_min_possible;
 };
 
 #endif /* defined(__openTSPS__ayb_settings__) */

@@ -84,11 +84,18 @@ inline void ofxTSPS::OpenNI2::depthRemapToRange(const ofShortPixels &src, ofPixe
     dst.allocate(src.getWidth(), src.getHeight(), 1);
     const unsigned short *src_ptr = src.getPixels();
     unsigned char *dst_ptr = dst.getPixels();
-    
+ 
     // Linear array of pixels (W x H)
     for (int i=0; i<(src.getWidth()*src.getHeight()); i++){
-        unsigned short C = *src_ptr;
-        *dst_ptr = C==0? 0 : ofMap(C, near, far, 0, 255, true);
+        // Set out of range values to 0
+        unsigned short displayPixel = *src_ptr;
+    
+        if (displayPixel < near || displayPixel > far){
+            displayPixel=0;
+        }
+        
+        // For remaining nonzero values, remap 0-255
+        *dst_ptr = (displayPixel==0?0:ofMap(displayPixel, near, far, 0, 255, false));
         src_ptr++;
         dst_ptr++;
     }
