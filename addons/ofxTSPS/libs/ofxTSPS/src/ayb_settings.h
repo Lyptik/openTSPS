@@ -18,6 +18,7 @@ class AYB_settings {
         AYB_settings();
         int clip_near;
         int clip_far;
+        bool toggle_autoBg;
 
 };
 

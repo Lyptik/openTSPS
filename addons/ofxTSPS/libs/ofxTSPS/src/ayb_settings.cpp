@@ -12,4 +12,5 @@
 AYB_settings::AYB_settings(){
     clip_near=1;
     clip_far=1000;
+    toggle_autoBg = false;
 }

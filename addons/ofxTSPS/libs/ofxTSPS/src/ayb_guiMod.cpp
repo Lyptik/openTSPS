@@ -171,6 +171,8 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
 // Handle GUI updates (mutually exclusive options, ect)
 /*
 
+ AYB_BGSUB_APPLY
+ 
  AYB_DEPTHCLIP_APPLY
  AYB_DEPTHCLIP_NEAR
  AYB_DEPTHCLIP_FAR
@@ -199,6 +201,9 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
         printf("*DETECT GROUND*");
         panel.setValueB("AYB_DETECT_GROUND", false);
     }
+    
+    // BUTTON: Detect Ground
+    settings.ayb_Settings.toggle_autoBg = panel.getValueB("AYB_BGSUB_APPLY");
     
     // OPTION: DEPTH CLIPPING
     //FIXME: These shouldn't be hardcoded

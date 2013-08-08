@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E12CFF515F8168B00D5BC05 /* Processor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2E12CFF315F8168B00D5BC05 /* Processor.cpp */; };
+		578E979017B31CA4003B6B9B /* ayb_processor2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 578E978E17B31CA3003B6B9B /* ayb_processor2.cpp */; };
 		5791538717B2A623001BDC73 /* ayb_guiMod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538117B2A623001BDC73 /* ayb_guiMod.cpp */; };
 		5791538817B2A623001BDC73 /* ayb_kernel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538317B2A623001BDC73 /* ayb_kernel.cpp */; };
 		5791538917B2A623001BDC73 /* ayb_settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5791538517B2A623001BDC73 /* ayb_settings.cpp */; };
@@ -184,6 +185,8 @@
 
 /* Begin PBXFileReference section */
 		2E12CFF315F8168B00D5BC05 /* Processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Processor.cpp; sourceTree = "<group>"; };
+		578E978E17B31CA3003B6B9B /* ayb_processor2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_processor2.cpp; sourceTree = "<group>"; };
+		578E978F17B31CA4003B6B9B /* ayb_processor2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_processor2.h; sourceTree = "<group>"; };
 		5791538117B2A623001BDC73 /* ayb_guiMod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_guiMod.cpp; sourceTree = "<group>"; };
 		5791538217B2A623001BDC73 /* ayb_guiMod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_guiMod.h; sourceTree = "<group>"; };
 		5791538317B2A623001BDC73 /* ayb_kernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_kernel.cpp; sourceTree = "<group>"; };
@@ -1728,6 +1731,8 @@
 				5791538517B2A623001BDC73 /* ayb_settings.cpp */,
 				5791538617B2A623001BDC73 /* ayb_settings.h */,
 				579153A417B2F956001BDC73 /* ayb_processor.cpp */,
+				578E978E17B31CA3003B6B9B /* ayb_processor2.cpp */,
+				578E978F17B31CA4003B6B9B /* ayb_processor2.h */,
 				579153A517B2F957001BDC73 /* ayb_processor.h */,
 				A9B0E04616B03F9000B4268E /* SpacebrewSender.cpp */,
 				A9485E2F15C4712A00761D1C /* CvPerson.cpp */,
@@ -2500,6 +2505,7 @@
 				5791538817B2A623001BDC73 /* ayb_kernel.cpp in Sources */,
 				5791538917B2A623001BDC73 /* ayb_settings.cpp in Sources */,
 				579153A617B2F958001BDC73 /* ayb_processor.cpp in Sources */,
+				578E979017B31CA4003B6B9B /* ayb_processor2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -58,6 +58,7 @@
 #include "ofxTSPS/Processor.h"
 //#include "ofxTSPS/opencv/OpenCvProcessor.h" // R.I.P.
 #include "ofxTSPS/cv/CvProcessor.h"
+#include "ayb_processor2.h" // ayb dav : add custom processor
 
 // gui + settings
 #include "ofxTSPS/gui/Settings.h"
@@ -116,7 +117,7 @@ namespace ofxTSPS {
             // processor
             void setProcessor ( Processor * _processor );
             Processor * getProcessor(){ return tspsProcessor; };
-            
+        
             //communication
             
             void setupTuio(string ip, int port);

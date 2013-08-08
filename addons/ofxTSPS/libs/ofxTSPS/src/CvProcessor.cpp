@@ -101,7 +101,7 @@ namespace ofxTSPS {
     }
     
     //------------------------------------------------------------------------
-    void CvProcessor::blankBackground(){
+    void CvProcessor::blankBackground(){ 
         subtract(backgroundImage, backgroundImage, backgroundImage);
     }
     

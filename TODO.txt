@@ -2,7 +2,6 @@
 
 - Automatic background substraction (background tab gui button and algo)
 	-> deactivate the other backghround stuff automatically ?
-- add a bypass Thresholding button
 - depth panel (between background and diffencing)
 	-> Add near and far clipping in background tab (after projection)
 	-> test remapping stuff
@@ -11,6 +10,7 @@
 - Syphon tab in Communication panel
 	-> Syphon client for overlapping and mapping output
 	-> slider for crossfading
+- Detecting the pool table and the holes ! -> sending them by Osc
 - Find a way to switch to live again -> works but really rarely !
 
 # Roadmap :

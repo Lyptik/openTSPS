@@ -86,6 +86,7 @@ namespace ofxTSPS {
         bOscEnabled = bTuioEnabled = bTcpEnabled = bWebSocketServerEnabled = bWebSocketClientEnabled = false;
         p_Settings = gui.getSettings();
         
+        
         //setup gui
         gui.setup();
         gui.setupQuadGui( width, height );
@@ -153,8 +154,8 @@ namespace ofxTSPS {
         
         // setup default processor
         if ( tspsProcessor == NULL ){
-            setProcessor( new CvProcessor);
-        }    
+            setProcessor( new AYB_processor2); // ayb dav : replace with custom processor
+        }
         tspsProcessor->setup( width, height, this );
         
         // setup gui based on processor capabilities
@@ -895,6 +896,12 @@ namespace ofxTSPS {
         //progressive relearn background
         if (p_Settings->bLearnBackgroundProgressive){
             backgroundImage.setFromPixels( tspsProcessor->progressiveBackground( warpedImage, p_Settings->fLearnRate * .00001 ));
+        }
+        
+        // ayb dav : auto background
+        if(p_Settings->ayb_Settings.toggle_autoBg){
+            //((*AYB_processor2)tspsProcessor)->foobar();
+            // TODO
         }
         
         // black out background?
