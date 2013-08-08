@@ -31,7 +31,7 @@ class AYB_settings {
     
         // Processing options
         bool toggle_autoBg;
-        bool apply_groundDetection;
+        bool f_detectGround;
     
         // Syphon
         bool syphon_on;

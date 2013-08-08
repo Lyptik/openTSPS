@@ -5,12 +5,14 @@
 //  Created by BRenfer on 7/19/13.
 //
 //  AYB: I refactored this into a cpp/h file so we could work with it
+//  This class represents a TSPS source
 
 #pragma once
 
 
 #include "ofxTSPS/source/Source.h"
 #include "ofxNI2.h"
+#include "ofxNiTE2.h"
 
 namespace ofxTSPS {
     class OpenNI2 : public Source, public ofxNI2::DepthStream {
@@ -21,6 +23,11 @@ namespace ofxTSPS {
         
         ofxTSPS::SourceType getType();
 
+        
+        ofxNiTE2::UserTracker userTracker;
+        
+
+        
         bool available();
         void update();
         
@@ -33,6 +40,7 @@ namespace ofxTSPS {
 
         bool doProcessFrame();
         
+        // AYB: fixed what?
         // fixed invert...
         inline void depthRemapToRange(const ofShortPixels &src, ofPixels &dst, int near, int far, int invert);
         
@@ -45,6 +53,7 @@ namespace ofxTSPS {
         void setNearClipping( int near );
         
         void setFarClipping( int far );
+        
         
     private:
         ofxNI2::Device *device;
