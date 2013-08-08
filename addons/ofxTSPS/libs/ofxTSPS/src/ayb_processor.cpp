@@ -1,5 +1,5 @@
 //
-//  ayb_processor2.cpp
+//  ayb_processor.cpp
 //  openTSPS
 //
 //  Created by David Chanel on 8/8/13.
@@ -20,13 +20,12 @@ namespace ofxTSPS {
     }
     
     // Automatic depth background substraction (Works only for depth)
-    void AYB_processor::autoDepthBackground(ofBaseImage & image){
+    void AYB_processor::autoDepthBackground(ofBaseImage& image, ofShortPixels& depth){
         
-        // TODO : Do the algo !
         
-        cout << "foobar !" << endl;
-        
-        backgroundImage.setFromPixels( image.getPixelsRef() );
+        //ofxCv::threshold(image, 50);
+
+        backgroundImage.setFromPixels(image.getPixelsRef() );
         progressiveBackgroundImage.setFromPixels( image.getPixelsRef() );
     }
 

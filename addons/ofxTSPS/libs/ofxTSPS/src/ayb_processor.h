@@ -19,7 +19,7 @@ namespace ofxTSPS {
         
             AYB_processor();
         
-            void autoDepthBackground(ofBaseImage & image);
+            void autoDepthBackground(ofBaseImage& image, ofShortPixels& depth);
         
         private:
         
