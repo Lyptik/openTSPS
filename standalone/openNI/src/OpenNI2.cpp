@@ -60,7 +60,8 @@ unsigned char * ofxTSPS::OpenNI2::getPixels(){
 // getPixelsRef:
 ofPixels & ofxTSPS::OpenNI2::getPixelsRef(){
     static ofPixels retPix;
-    depthRemapToRange(ofxNI2::DepthStream::getPixelsRef(), retPix, nearClipping, farClipping, false);
+    currentDepthBufferRef = ofxNI2::DepthStream::getPixelsRef();
+    depthRemapToRange(currentDepthBufferRef, retPix, nearClipping, farClipping, false);
     return retPix;
 }
 

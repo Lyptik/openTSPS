@@ -901,7 +901,7 @@ namespace ofxTSPS {
         // ayb dav : auto background
         if(p_Settings->ayb_Settings.toggle_autoBg && (currentSource->getType() == CAMERA_CUSTOM || currentSource->getType() == ONI_SEQUENCE) ){
             // TODO : add auto background substraction on warped image
-            ((AYB_processor*)tspsProcessor)->autoDepthBackground(warpedImage, ((OpenNI2*)currentSource)->getDepthPixelsRef() );
+            backgroundImage.setFromPixels( ((AYB_processor*)tspsProcessor)->autoDepthBackground(((OpenNI2*)currentSource)->currentDepthBufferRef, p_Settings->ayb_Settings.clip_near, p_Settings->ayb_Settings.clip_far) );
         }
         
         // black out background?

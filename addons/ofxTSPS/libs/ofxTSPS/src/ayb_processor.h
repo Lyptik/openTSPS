@@ -19,10 +19,16 @@ namespace ofxTSPS {
         
             AYB_processor();
         
-            void autoDepthBackground(ofBaseImage& image, ofShortPixels& depth);
+            ofPixelsRef autoDepthBackground(ofShortPixels& depth, int near, int far);
         
         private:
         
+            ofImage testImage;
+            ofShortImage m_background;
+
+            void depthRemapToRange(const ofShortPixels &src, ofPixels &dst, int near, int far, int invert);
+        
+            bool bAllocateBackgroundFirstTime;
         
     };
     

@@ -43,8 +43,9 @@ namespace ofxTSPS {
         ofxNI2::Device * getDevice();
         
         void setNearClipping( int near );
-        
         void setFarClipping( int far );
+        
+        ofShortPixels currentDepthBufferRef;
         
     private:
         ofxNI2::Device *device;

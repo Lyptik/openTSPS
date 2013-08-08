@@ -232,7 +232,7 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     // OPTION: BACKGROUND SUBTRACT
     if (panel.getValueF("AYB_BGSUB_APPLY")){
         // Disable TSPS background recapture if our BG sub is on
-        panel.setValueF("RELEARN", false);
+        //panel.setValueF("RELEARN", false);
     }
     
     
