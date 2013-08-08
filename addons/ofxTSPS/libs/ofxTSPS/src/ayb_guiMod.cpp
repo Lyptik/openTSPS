@@ -179,14 +179,14 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     
     // MOMENTARY: Detect Ground
     if(panel.getValueB("AYB_DETECT_GROUND")){
-        printf("*DETECT GROUND*");
+        // Elsewhere, this flag gets picked up and consumed
+        settings.ayb_Settings.f_detectGround=true;
         panel.setValueB("AYB_DETECT_GROUND", false);
     }
     
     
     // ON/OFF: Just pass these through
     settings.ayb_Settings.toggle_autoBg = panel.getValueB("AYB_BGSUB_APPLY");
-    settings.ayb_Settings.apply_groundDetection = panel.getValueB("AYB_DETECT_GROUND");
     settings.ayb_Settings.syphon_on = panel.getValueB("AYB_SYPHON_ON");
     
     // ALGO 1 / ALGO 2: These are placeholders and should be replaced with real names before binding

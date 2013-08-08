@@ -915,8 +915,22 @@ namespace ofxTSPS {
         // AYB Depth: Panel added to do depth work
         //-----------------------
         //Detect ground
-        if(p_Settings->ayb_Settings.apply_groundDetection){
+        if(p_Settings->ayb_Settings.f_detectGround
+           && (currentSource->getType() == CAMERA_CUSTOM || currentSource->getType() == ONI_SEQUENCE)){
             
+             
+            // Grab the floor and confidence (not this required modifying the framework to surface the userTrackerFrame)
+            nite::Plane floor = ((OpenNI2*)currentSource)->userTracker.userTrackerFrame.getFloor();
+            float confidence  = ((OpenNI2*)currentSource)->userTracker.userTrackerFrame.getFloorConfidence();
+           
+            
+            // Display
+            cout << "Confidence:" << confidence << endl;
+            cout << "Point:"  << floor.point.x <<","<< floor.point.y <<","<< floor.point.z << endl;
+            cout << "Normal:" << floor.normal.x <<","<< floor.normal.y <<","<< floor.normal.z << endl;
+
+            // Clear the flag
+            p_Settings->ayb_Settings.f_detectGround=false;
         }
         
         //Projection

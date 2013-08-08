@@ -8,7 +8,11 @@
 #include "OpenNI2.h"
 #include "ofxTSPS/source/Source.h"
 
-// Constructor
+// This is a source, this helper identitifes us to the system
+ofxTSPS::SourceType ofxTSPS::OpenNI2::getType(){return CAMERA_CUSTOM;}
+
+
+// Constructor initialize an object with unintialized device
 ofxTSPS::OpenNI2::OpenNI2(){
     // type defaults to CAMERA_CUSTOM
     bCanTrackHaar = false;
@@ -20,23 +24,60 @@ ofxTSPS::OpenNI2::OpenNI2(){
 }
 
 
+// Open the source, which instantiates the device
+bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
+    
+    // Initialize and setup if device is null
+    if ( device == NULL ){
+        cout << "OPENNI2: Initializing device..." <<endl;
+        device = new ofxNI2::Device;
+        
+        // Setup with or without etc
+        if(etc == "")
+            device->setup();
+        else
+            device->setup(etc);
+        
+    }
+    
+    // Set up depth if not correct
+    if ( !bDepthSetup ){
+        cout << "OPENNI2: BISOPEN setup..." << endl;
+        bIsOpen = setup(*device);
+        if ( farClipping == -1 ) farClipping = stream.getMaxPixelValue();
+        //setFps(30);
+        bDepthSetup  = bIsOpen;
+    } else {
+        bIsOpen = true;
+    }
+    
+    if (bIsOpen){start();}
+    
+    
+    // Now set up user tracker
+    cout << "OPENNI2: Tracker setup..."<<endl;
+    userTracker.setup(*device);
 
-ofxTSPS::SourceType ofxTSPS::OpenNI2::getType(){
-    return CAMERA_CUSTOM;
+    
+    return bIsOpen;
+
 }
 
-// Destructor
+
+
+// Destructor destroys the decice
 ofxTSPS::OpenNI2::~OpenNI2(){
     device->exit();
     delete device;
 }
 
-// Return availble device (tries to initialize one if we call this before init, which you shouldn't do)
+
+// Device available?
 bool ofxTSPS::OpenNI2::available(){
-    if ( device == NULL ){
-        device = new ofxNI2::Device;
-        device->setup();
-    }
+    
+    if (device == NULL )
+        return false;
+    
     return (device->listDevices() >= 1);
 }
 
@@ -47,12 +88,13 @@ void ofxTSPS::OpenNI2::update(){
         bDoProcessFrame = isFrameNew();
     }
     updateTextureIfNeeded();
+    
     #ifdef TARGET_OSX
-        publishToSyphon( getTextureReference() );
+    publishToSyphon( getTextureReference() );
     #endif
 }
 
-// getPixels: 
+// getPixels:
 unsigned char * ofxTSPS::OpenNI2::getPixels(){
     return getPixelsRef().getPixels();
 }
@@ -84,12 +126,12 @@ inline void ofxTSPS::OpenNI2::depthRemapToRange(const ofShortPixels &src, ofPixe
     dst.allocate(src.getWidth(), src.getHeight(), 1);
     const unsigned short *src_ptr = src.getPixels();
     unsigned char *dst_ptr = dst.getPixels();
- 
+    
     // Linear array of pixels (W x H)
     for (int i=0; i<(src.getWidth()*src.getHeight()); i++){
         // Set out of range values to 0
         unsigned short displayPixel = *src_ptr;
-    
+        
         if (displayPixel < near || displayPixel > far){
             displayPixel=0;
         }
@@ -98,49 +140,6 @@ inline void ofxTSPS::OpenNI2::depthRemapToRange(const ofShortPixels &src, ofPixe
         *dst_ptr = (displayPixel==0?0:ofMap(displayPixel, near, far, 0, 255, false));
         src_ptr++;
         dst_ptr++;
-    }
-}
-
-// Open the hardware 
-bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
-    
-    // Initialize if device is null
-    if ( device == NULL ){
-        device = new ofxNI2::Device;
-        if(etc == "")
-            device->setup();
-        else
-            device->setup(etc);
-    }
-    
-    // If initialization failed, the object exists
-    
-    //openni::Device thisDevice = device->get();
-    
-    //cout << this->device->device.m_device;
-    //cout << this->device->get().m_device;
-    
-    
-    if ( device == NULL){
-         cout << "OpenNI2: Cannot locate suitable device - is hardware plugged in?";
-        return false;
-        
-    // Init okay, make sure we attach device (do this once)
-    }else{
-        
-        if ( !bDepthSetup ){
-            bIsOpen = setup(*device);
-            if ( farClipping == -1 ) farClipping = stream.getMaxPixelValue();
-            setFps(30);
-            bDepthSetup  = bIsOpen;
-        } else {
-            bIsOpen = true;
-        }
-        
-        if (bIsOpen){start();}
-        
-        return bIsOpen;
-
     }
 }
 

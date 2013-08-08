@@ -23,7 +23,7 @@ AYB_settings::AYB_settings(){
     
     // Processing options
     toggle_autoBg = false;
-    apply_groundDetection=false;
+    f_detectGround=false;
     
     
     // Syphon
