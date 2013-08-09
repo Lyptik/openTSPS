@@ -901,7 +901,11 @@ namespace ofxTSPS {
         // ayb dav : auto background
         if(p_Settings->ayb_Settings.toggle_autoBg && (currentSource->getType() == CAMERA_CUSTOM || currentSource->getType() == ONI_SEQUENCE) ){
             // TODO : add auto background substraction on warped image
-            backgroundImage.setFromPixels( ((AYB_processor*)tspsProcessor)->autoDepthBackground(((OpenNI2*)currentSource)->currentDepthBufferRef, p_Settings->ayb_Settings.clip_near, p_Settings->ayb_Settings.clip_far) );
+            backgroundImage.setFromPixels(
+                ((AYB_processor*)tspsProcessor)->autoDepthBackground(((OpenNI2*)currentSource)->currentDepthBufferRef,
+                                                                     p_Settings->ayb_Settings.clip_near,
+                                                                     p_Settings->ayb_Settings.clip_far,
+                                                                     10 )); // 10mm for margin, could be added as a slider if needed
         }
         
         // black out background?

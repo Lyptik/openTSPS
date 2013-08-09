@@ -21,8 +21,8 @@ namespace ofxTSPS {
     }
     
     // Automatic depth background substraction (Works only for depth)
-    ofPixelsRef AYB_processor::autoDepthBackground(ofShortPixels& depth, int near, int far){
-        
+    ofPixelsRef AYB_processor::autoDepthBackground(ofShortPixels& depth, int near, int far, float margin){
+
         if(bAllocateBackgroundFirstTime) {
             m_background.allocate(depth.getWidth(), depth.getHeight(), OF_IMAGE_GRAYSCALE);
             subtract(backgroundImage, backgroundImage, backgroundImage); // blank out background
@@ -37,7 +37,10 @@ namespace ofxTSPS {
             // upgrade current background with the furthest value (maxvalue)
             
             if(src_ptr[i] != 0) // No data (black) -> we skip
-                pBackground[i] = MAX(pBackground[i], src_ptr[i]);
+            {
+                if(src_ptr[i] - pBackground[i] >  margin) // update only if point move more than “margin“ in mm
+                    pBackground[i] = MAX(pBackground[i], src_ptr[i]);
+            }
         }
         
 

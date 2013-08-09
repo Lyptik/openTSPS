@@ -33,6 +33,10 @@ class AYB_settings {
         bool toggle_autoBg;
         bool f_detectGround;
     
+        // Algo
+        float algo1_slider;
+        float algo2_slider;
+    
         // Syphon
         bool syphon_on;
         float syphon_overlayAlpha;
