@@ -1,22 +1,25 @@
 # Coding :
 
 - Automatic background substraction (background tab gui button and algo)
-	-> deactivate the other backghround stuff automatically ?
-- depth panel (between background and diffencing)
+	-> mix with the progressive background stuff
+- depth panel
 	-> ground detection
-	-> top / bottom / ... projection
-    -> Add remapping option (after projection)
+	-> top / bottom / ... / free camera projection
+    -> Add remapping option (after projection) -> in case of a foreground window
+    -> Add depth screen to see the foreground visual
+- Pool table and pool holes detection
 - Syphon tab in Communication panel
-	-> Syphon client for overlapping and mapping output
+    -> Syphon input for overlap
 	-> slider for crossfading
-- ADding a Pool panel in data -> Detecting the pool table and the holes ! -> sending them by Osc
-- Find a way to switch to live again -> works but really rarely !
+- Communication :
+    - output datas -> ID of TSPS
+    - output datas -> rectangle and holes
+- Integrate OpenNI2 custom driver and integrate oni sequence stuff
 
 # Roadmap :
 
-- Syphon server to make visuals, being able to do custom visual algorithms ?
-- Custom algorithms as plugins (depth descriptor for example)
-- New datas to send
-	-> custom data for algortihms (or way to plug)
-- Adding masks
-- 
+- Syphon server to make visual to each point of the pipe
+- being able to do custom visual algorithms
+- being able to send custom datas
+- Adding masks features
+- Adding warping of the grid
