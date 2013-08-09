@@ -29,6 +29,8 @@ class AYB_settings {
         int clip_max_possible;
         int clip_min_possible;
     
+        bool f_warp;
+    
         // Processing options
         bool toggle_autoBg;
         bool f_detectGround;

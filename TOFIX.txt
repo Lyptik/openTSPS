@@ -1,3 +1,4 @@
 # TOFIX :
 
 - bug when bypassing depth clipping -> values does reset
+- Cannot open an other sequence once one sequence is opened

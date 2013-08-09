@@ -20,6 +20,7 @@ AYB_settings::AYB_settings(){
     clip_near=clip_min_possible;
     clip_far=clip_max_possible;
     
+    f_warp = false;
     
     // Processing options
     toggle_autoBg = false;

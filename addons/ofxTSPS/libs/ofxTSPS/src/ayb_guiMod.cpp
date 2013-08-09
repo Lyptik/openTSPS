@@ -60,17 +60,13 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
     panel.addSlider("Near:", "AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
     panel.addSlider("Far:", "AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
     
-    
-    // SENSING:BACKGROUND Tab
-    ///////////////////////////////////////////////////////////////
-    panel.setWhichPanel("background");
-    guiTypeGroup * autoGroup = panel.addGroup("Automatic Background Subtraction");
-    autoGroup->setBackgroundColor(148,129,85);
-    autoGroup->setBackgroundSelectColor(248,129,85);
-    autoGroup->seBaseColor(180,87,128);
-    autoGroup->setShowText(false);
-    panel.addToggle("AYB Background Subtraction", "AYB_BGSUB_APPLY", false);
-    
+    // Warp
+    guiTypeGroup * warpGroup = panel.addGroup("warp");
+    warpGroup->setBackgroundColor(148,129,85);
+    warpGroup->setBackgroundSelectColor(148,129,85);
+    warpGroup->seBaseColor(244,136,136);
+    warpGroup->setShowText(false);
+    panel.addToggle("Warp", "AYB_WARP_APPLY", false);
     
     // Ground detection button
     guiTypeGroup * autoGroup2 = panel.addGroup("Detect Ground");
@@ -93,7 +89,16 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
     multi.push_back("left");
     multi.push_back("right");
     panel.addMultiToggle("Projection:", "AYB_PROJECTION_OPTION", 0, multi);
-    
+        
+    // SENSING:BACKGROUND Tab
+    ///////////////////////////////////////////////////////////////
+    panel.setWhichPanel("background");
+    guiTypeGroup * autoGroup = panel.addGroup("Automatic Background Subtraction");
+    autoGroup->setBackgroundColor(148,129,85);
+    autoGroup->setBackgroundSelectColor(248,129,85);
+    autoGroup->seBaseColor(180,87,128);
+    autoGroup->setShowText(false);
+    panel.addToggle("AYB Background Subtraction", "AYB_BGSUB_APPLY", false);
     
     // SENSING:PROCESSING
     ///////////////////////////////////////////////////////////////
@@ -207,7 +212,6 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
         //panel.setValueF("RELEARN", false);
     }
     
-    
-    
+    settings.ayb_Settings.f_warp=(ayb_projectionType)panel.getValueB("AYB_WARP_APPLY");
     
 }

@@ -844,7 +844,10 @@ namespace ofxTSPS {
         //-------------------------------
         
         //warp background
-        getQuadSubImage(cameraImage, warpedImage, p_Settings->quadWarpScaled, OF_IMAGE_GRAYSCALE);	
+        //if(p_Settings->ayb_Settings.f_warp)
+            getQuadSubImage(cameraImage, warpedImage, p_Settings->quadWarpScaled, OF_IMAGE_GRAYSCALE);
+        //else
+            //warpedImage.cropFrom(cameraImage, <#int x#>, <#int y#>, <#int w#>, <#int h#>);
         
         // mirror?
         if ( p_Settings->bFlipX || p_Settings->bFlipY ){
