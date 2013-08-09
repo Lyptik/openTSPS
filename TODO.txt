@@ -1,25 +1,31 @@
 # Coding :
 
+- Move depth clipping stuff in adjustment + add an option to enable/disable skewing + move projection stuff into it
+    -> apply them on depth buffer as well
 - Automatic background substraction (background tab gui button and algo)
 	-> mix with the progressive background stuff
+    -> not work when skewing
 - depth panel
 	-> ground detection
-	-> top / bottom / ... / free camera projection
+	-> top / bottom / ... / free camera projection -> see camera objects in openframeworks
     -> Add remapping option (after projection) -> in case of a foreground window
-    -> Add depth screen to see the foreground visual
+    -> Add depth screen to see the foreground visual (and to use them later on when there will be syphon)
 - Pool table and pool holes detection
 - Syphon tab in Communication panel
     -> Syphon input for overlap
 	-> slider for crossfading
+    -> Syphon output at each stage
 - Communication :
     - output datas -> ID of TSPS
     - output datas -> rectangle and holes
-- Integrate OpenNI2 custom driver and integrate oni sequence stuff
+- Custom algo solution
+- Integrate OpenNI2 and oni sequence stuff correctly into TSPS and GUI (see with Brett)
+- Better skewing and masks stuff -> skewing can not be use if you want to remmap stuff
+-> Adding an adjustment panel
 
 # Roadmap :
 
 - Syphon server to make visual to each point of the pipe
 - being able to do custom visual algorithms
 - being able to send custom datas
-- Adding masks features
 - Adding warping of the grid

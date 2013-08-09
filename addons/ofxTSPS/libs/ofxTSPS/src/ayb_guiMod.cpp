@@ -62,8 +62,8 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
         clippingGroup->seBaseColor(244,136,136);
         clippingGroup->setShowText(false);
         panel.addToggle("Depth Clipping", "AYB_DEPTHCLIP_APPLY", false);
-        panel.addSlider("Near:", "AYB_DEPTHCLIP_NEAR", 1, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
-        panel.addSlider("Far:", "AYB_DEPTHCLIP_FAR", 1, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
+        panel.addSlider("Near:", "AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
+        panel.addSlider("Far:", "AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
     
     
         // SENSING:BACKGROUND Tab
@@ -221,13 +221,16 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     
     // Apply Depth clipping option
     if (!panel.getValueB("AYB_DEPTHCLIP_APPLY")){
-        panel.setValueI("AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible);
-        panel.setValueI("AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible);
+        //panel.setValueI("AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible);
+        //panel.setValueI("AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible);
+    
+        settings.ayb_Settings.clip_near=settings.ayb_Settings.clip_min_possible;
+        settings.ayb_Settings.clip_far=settings.ayb_Settings.clip_max_possible;
+    }else{
+    
+        settings.ayb_Settings.clip_near=panel.getValueI("AYB_DEPTHCLIP_NEAR");
+        settings.ayb_Settings.clip_far=panel.getValueI("AYB_DEPTHCLIP_FAR");
     }
-    
-    settings.ayb_Settings.clip_near=panel.getValueI("AYB_DEPTHCLIP_NEAR");
-    settings.ayb_Settings.clip_far=panel.getValueI("AYB_DEPTHCLIP_FAR");
-    
  
     // OPTION: BACKGROUND SUBTRACT
     if (panel.getValueF("AYB_BGSUB_APPLY")){

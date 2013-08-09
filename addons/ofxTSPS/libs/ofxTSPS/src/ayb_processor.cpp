@@ -25,6 +25,7 @@ namespace ofxTSPS {
         
         if(bAllocateBackgroundFirstTime) {
             m_background.allocate(depth.getWidth(), depth.getHeight(), OF_IMAGE_GRAYSCALE);
+            subtract(backgroundImage, backgroundImage, backgroundImage); // blank out background
             bAllocateBackgroundFirstTime = false;
         }
         
@@ -35,15 +36,13 @@ namespace ofxTSPS {
             
             // upgrade current background with the furthest value (maxvalue)
             
-            if(pBackground[i] != 0) // No data (black) -> we skip
+            if(src_ptr[i] != 0) // No data (black) -> we skip
                 pBackground[i] = MAX(pBackground[i], src_ptr[i]);
         }
         
-        // Saving current 16bits background
-        m_background = depth;
 
         // Remapping background image values to 8 bits scale
-        depthRemapToRange(depth, backgroundImage.getPixelsRef(), near, far, false);
+        depthRemapToRange(m_background, backgroundImage.getPixelsRef(), near, far, false);
 
         // Copying background to the progressiveBackground buffer
         progressiveBackgroundImage.setFromPixels( backgroundImage.getPixelsRef());

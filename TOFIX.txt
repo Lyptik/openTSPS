@@ -1,4 +1,3 @@
 # TOFIX :
 
-- Bug when opening an oni file -> jump to CUSTOM sequence
-- Bug when wanting to go back to videofile file after
+- bug when bypassing depth clipping -> values does reset

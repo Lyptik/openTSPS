@@ -954,11 +954,10 @@ namespace ofxTSPS {
         }
         
         // These should be replaced with the names of actual algorithms
+        // They should be an abstract class providing what they need
+        // and the algo should have a string that would be displayed into the GUI
         //Algo 1
         //Algo 2
-        
-        
-        
         
         //-----------------------
         // Difference image
