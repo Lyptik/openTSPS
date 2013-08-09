@@ -17,15 +17,13 @@
     -> Syphon output at each stage
 - Communication :
     - output datas -> ID of TSPS
-    - output datas -> rectangle and holes
-- Custom algo solution
+    - output datas -> pool rectangle and holes
 - Integrate OpenNI2 and oni sequence stuff correctly into TSPS and GUI (see with Brett)
 - Better skewing and masks stuff -> skewing can not be use if you want to remmap stuff
 -> Adding an adjustment panel
 
 # Roadmap :
 
+- Custom algo solution
 - Syphon server to make visual to each point of the pipe
-- being able to do custom visual algorithms
-- being able to send custom datas
 - Adding warping of the grid

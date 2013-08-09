@@ -19,7 +19,7 @@ namespace ofxTSPS {
         
             AYB_processor();
         
-            ofPixelsRef autoDepthBackground(ofShortPixels& depth, int near, int far);
+            ofPixelsRef autoDepthBackground(ofShortPixels& depth, int near, int far, float margin);
         
         private:
         

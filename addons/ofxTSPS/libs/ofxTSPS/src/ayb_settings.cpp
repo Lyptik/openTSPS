@@ -25,6 +25,9 @@ AYB_settings::AYB_settings(){
     toggle_autoBg = false;
     f_detectGround=false;
     
+    // Algo
+    algo1_slider = 0;
+    algo2_slider = 0;
     
     // Syphon
     syphon_on=false;

@@ -122,7 +122,7 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
         algo1Group->seBaseColor(180,87,128);
         algo1Group->setShowText(false);
         panel.addToggle("Algorithm 1", "AYB_ALGO1_APPLY", false);
-        panel.addSlider("Option:", "AYB_ALGO1_OPTION", 1, 1, 100, true);
+        panel.addSlider("Option:", "AYB_ALGO1_OPTION", 1, 1, 1000, true);
         
         // Algorithm 2
         guiTypeGroup * algo2Group = panel.addGroup("Algorithm 2");
@@ -190,13 +190,14 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     settings.ayb_Settings.syphon_on = panel.getValueB("AYB_SYPHON_ON");
     
     // ALGO 1 / ALGO 2: These are placeholders and should be replaced with real names before binding
+    settings.ayb_Settings.algo1_slider=panel.getValueF("AYB_ALGO1_OPTION");
+    settings.ayb_Settings.algo2_slider=panel.getValueF("AYB_ALGO2_OPTION");
     
     // Syphon
     settings.ayb_Settings.syphon_on=panel.getValueB("AYB_SYPHON_ON");
     settings.ayb_Settings.syphon_overlayAlpha=panel.getValueF("AYB_SYPHON_ALPHA");
     settings.ayb_Settings.syphon_overlaySource=panel.getValueS("AYB_SYPHON_OVERLAYSOURCE");
     settings.ayb_Settings.syphon_serverName=panel.getValueS("AYB_SYPHON_SERVERNAME");
-    
     
     //Projection option (see ayb_settings for enum type)
     settings.ayb_Settings.projectionOption=(ayb_projectionType)panel.getValueI("AYB_PROJECTION_OPTION");
