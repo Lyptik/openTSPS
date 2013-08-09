@@ -168,14 +168,18 @@ namespace ofxTSPS {
             #ifndef OF_VIDEO_CAPTURE_QTKIT
                 panel.addButton("open video settings");
             #endif
+        
+        
+            // NOTE: The order here MUST match the order of the
+            // enumerated type or the GUI won't work right Constants.h/SourceType
             vector<string>source_types;
             source_types.push_back("Web Camera");
             source_types.push_back("Video File");
             source_types.push_back("Kinect");
-            source_types.push_back("Kinect:OpenNI2");
             #ifdef TARGET_OSX
-                source_types.push_back("Syphon");
+                    source_types.push_back("Syphon");
             #endif
+            source_types.push_back("Custon (Kinect:OpenNI2)");
             panel.addMultiToggle("source type", "SOURCE_TYPE", 0, source_types);
         
             // video files
