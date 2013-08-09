@@ -19,7 +19,8 @@ namespace ofxTSPS {
         
             AYB_processor();
         
-            ofPixelsRef autoDepthBackground(ofShortPixels& depth, int near, int far, float margin);
+            ofPixelsRef autoDepthBackground(ofShortPixels& depth, int near, int far, float margin);        
+            void getQuadSubImageCropped(ofImage& inputImage, ofImage& outputImage, vector <ofPoint>& quad, ofImageType imageType);
         
         private:
         

@@ -54,8 +54,6 @@ namespace ofxTSPS {
         return backgroundImage.getPixelsRef();
     }
 
-
-
     // Convert depthmap value to range
     void AYB_processor::depthRemapToRange(const ofShortPixels &src, ofPixels &dst, int near, int far, int invert){
         
@@ -84,6 +82,11 @@ namespace ofxTSPS {
             dst_ptr++;
         }
     }
-
-
+    
+    void AYB_processor::getQuadSubImageCropped(ofImage& inputImage, ofImage& outputImage, vector <ofPoint>& quad, ofImageType imageType) {
+        
+        outputImage = inputImage; // Is this optimized, does pass a reference or does it copy ? Is there a better way with a ROI maybe ?
+        // TODO :
+        //outputImage.crop(quad[0].x, quad[0].y, quad[1].x - quad[0].x, quad[3].y - quad[0].y);
+    }
 }

@@ -22,6 +22,7 @@ namespace ofxTSPS {
         
         // step 0: set camera image
         void setCameraImage( ofBaseImage & image );
+        void getQuadSubImageWarped(ofImage& inputImage, ofImage& outputImage, vector <ofPoint>& quad, ofImageType imageType);
         
         // step 1: background
         void captureBackground( ofBaseImage & image );

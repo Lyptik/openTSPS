@@ -44,7 +44,6 @@
 #include "ofxTSPS/Scene.h"
 #include "ofxTSPS/Person.h"
 #include "ofxTSPS/utils/View.h"
-#include "ofxTSPS/utils/Utils.h"
 
 // sources
 #include "ofxTSPS/source/Source.h"
