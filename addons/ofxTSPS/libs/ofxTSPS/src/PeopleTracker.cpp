@@ -920,8 +920,8 @@ namespace ofxTSPS {
             
              
             // Grab the floor and confidence (not this required modifying the framework to surface the userTrackerFrame)
-            nite::Plane floor = ((OpenNI2*)currentSource)->userTracker.userTrackerFrame.getFloor();
-            float confidence  = ((OpenNI2*)currentSource)->userTracker.userTrackerFrame.getFloorConfidence();
+            nite::Plane floor = ((OpenNI2*)currentSource)->userTracker.getFloor();
+            float confidence  = ((OpenNI2*)currentSource)->userTracker.getFloorConfidence();
            
             
             // Display
