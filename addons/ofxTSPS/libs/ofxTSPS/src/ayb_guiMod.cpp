@@ -16,24 +16,24 @@ AYB_guiMod::AYB_guiMod(){
     
     // Prints out some debugging info about compiler defaults
     // Can be removed
-    #ifdef _LIBCPP_VERSION
-        std::cout << "Using libc++\n";
-    #else
-        std::cout << "Using libstdc++\n";
-    #endif
-    #ifdef __GXX_EXPERIMENTAL_CXX0X__
-    #if __cplusplus == 1
-        std::cout << "Language mode = gnu++11\n";
-    #else
-        std::cout << "Language mode = c++11\n";
-    #endif
-    #else
-    #if __cplusplus == 1
-        std::cout << "Language mode = gnu++98\n";
-    #else
-        std::cout << "Language mode = c++98\n";
-    #endif
-    #endif
+#ifdef _LIBCPP_VERSION
+    std::cout << "Using libc++\n";
+#else
+    std::cout << "Using libstdc++\n";
+#endif
+#ifdef __GXX_EXPERIMENTAL_CXX0X__
+#if __cplusplus == 1
+    std::cout << "Language mode = gnu++11\n";
+#else
+    std::cout << "Language mode = c++11\n";
+#endif
+#else
+#if __cplusplus == 1
+    std::cout << "Language mode = gnu++98\n";
+#else
+    std::cout << "Language mode = c++98\n";
+#endif
+#endif
 }
 
 
@@ -46,114 +46,82 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
                            ofxTSPS::Settings &settings){
     
     
+    // INPUT: ADJUSTMENT DEPTH
+    ////////////////////////////////////////////////
+    panel.setWhichPanel("adjustment:depth");
     
-    // Some options should only appear if we have a depth source
-    // Currently we're not enabling this because "depth source" could be a syphon, for example
-    
-    bool depthSource=true;
-    if (depthSource){
-        
-        // SOURCE:VIDEO tab
-        ///////////////////////////////////////////////////////////////
-        panel.setWhichPanel("video");
-        guiTypeGroup * clippingGroup = panel.addGroup("clipping");
-        clippingGroup->setBackgroundColor(148,129,85);
-        clippingGroup->setBackgroundSelectColor(148,129,85);
-        clippingGroup->seBaseColor(244,136,136);
-        clippingGroup->setShowText(false);
-        panel.addToggle("Depth Clipping", "AYB_DEPTHCLIP_APPLY", false);
-        panel.addSlider("Near:", "AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
-        panel.addSlider("Far:", "AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
+    // Clipping
+    guiTypeGroup * clippingGroup = panel.addGroup("clipping");
+    clippingGroup->setBackgroundColor(148,129,85);
+    clippingGroup->setBackgroundSelectColor(148,129,85);
+    clippingGroup->seBaseColor(244,136,136);
+    clippingGroup->setShowText(false);
+    panel.addToggle("Depth Clipping", "AYB_DEPTHCLIP_APPLY", false);
+    panel.addSlider("Near:", "AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
+    panel.addSlider("Far:", "AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible, settings.ayb_Settings.clip_min_possible, settings.ayb_Settings.clip_max_possible, true);
     
     
-        // SENSING:BACKGROUND Tab
-        ///////////////////////////////////////////////////////////////
-        panel.setWhichPanel("background");
-        guiTypeGroup * autoGroup = panel.addGroup("Automatic Background Subtraction");
-        autoGroup->setBackgroundColor(148,129,85);
-        autoGroup->setBackgroundSelectColor(248,129,85);
-        autoGroup->seBaseColor(180,87,128);
-        autoGroup->setShowText(false);
-        panel.addToggle("AYB Background Subtraction", "AYB_BGSUB_APPLY", false);
+    // SENSING:BACKGROUND Tab
+    ///////////////////////////////////////////////////////////////
+    panel.setWhichPanel("background");
+    guiTypeGroup * autoGroup = panel.addGroup("Automatic Background Subtraction");
+    autoGroup->setBackgroundColor(148,129,85);
+    autoGroup->setBackgroundSelectColor(248,129,85);
+    autoGroup->seBaseColor(180,87,128);
+    autoGroup->setShowText(false);
+    panel.addToggle("AYB Background Subtraction", "AYB_BGSUB_APPLY", false);
     
-        
     
-        // SENSING:DEPTH Tab
-        ///////////////////////////////////////////////////////////////
-        /*
-         
-        FIXME: This insert is in the TSPS gui code, but I prefer it not to be
-         
-        // Add new tab
-        guiTypePanel * depthPanel = panel.addPanel("depth", 1, false);
-        depthPanel->setDrawLock( false );
-        depthPanel->setBackgroundColor(123,191,174);
-        depthPanel->setBackgroundSelectColor(123,191,174);
-         */
-        
-        // Add options 
-        panel.setWhichPanel("depth");
-        guiTypeGroup * autoGroup2 = panel.addGroup("Detect Ground");
-        autoGroup2->setBackgroundColor(148,129,85);
-        autoGroup2->setBackgroundSelectColor(248,129,85);
-        autoGroup2->seBaseColor(180,87,128);
-        autoGroup2->setShowText(false);
-        panel.addToggle("Detect Ground", "AYB_DETECT_GROUND", false);
-        
-        // Projection selection
-        guiTypeGroup * projectionGroup = panel.addGroup("Projection View");
-        projectionGroup->setBackgroundColor(148,129,85);
-        projectionGroup->setBackgroundSelectColor(248,129,85);
-        projectionGroup->seBaseColor(180,87,128);
-        projectionGroup->setShowText(false);
-        vector<string> multi;
-        multi.push_back("none");
-        multi.push_back("top");
-        multi.push_back("bottom");
-        multi.push_back("left");
-        multi.push_back("right");
-        panel.addMultiToggle("Projection:", "AYB_PROJECTION_OPTION", 0, multi);
-
-        
-        // Algorithm 1
-        guiTypeGroup * algo1Group = panel.addGroup("Algorithm 1");
-        algo1Group->setBackgroundColor(148,129,85);
-        algo1Group->setBackgroundSelectColor(248,129,85);
-        algo1Group->seBaseColor(180,87,128);
-        algo1Group->setShowText(false);
-        panel.addToggle("Algorithm 1", "AYB_ALGO1_APPLY", false);
-        panel.addSlider("Option:", "AYB_ALGO1_OPTION", 1, 1, 1000, true);
-        
-        // Algorithm 2
-        guiTypeGroup * algo2Group = panel.addGroup("Algorithm 2");
-        algo2Group->setBackgroundColor(148,129,85);
-        algo2Group->setBackgroundSelectColor(248,129,85);
-        algo2Group->seBaseColor(180,87,128);
-        algo2Group->setShowText(false);
-        panel.addToggle("Algorithm 2", "AYB_ALGO2_APPLY", false);
-        panel.addSlider("Option:", "AYB_ALGO2_OPTION", 1, 1, 100, true);
-
-        
-        /*
-         This doesn't work. Injecting the panel manually for now
-         inside GuiManager.cpp, ugh
-         
-         Note: it doesn't work because panel.add is the determinant
-         
-        // Make sure the depth tab is in third place
-        std::vector<guiTypePanel *>::iterator it;
-        it = panelGroups["sensing"].begin();
-        it+=2;
-        panelGroups["sensing"].insert(it, depthPanel);
-         */
-        
-    }
+    // Ground detection button
+    guiTypeGroup * autoGroup2 = panel.addGroup("Detect Ground");
+    autoGroup2->setBackgroundColor(148,129,85);
+    autoGroup2->setBackgroundSelectColor(248,129,85);
+    autoGroup2->seBaseColor(180,87,128);
+    autoGroup2->setShowText(false);
+    panel.addToggle("Detect Ground", "AYB_DETECT_GROUND", false);
     
- 
+    // Projection selection
+    guiTypeGroup * projectionGroup = panel.addGroup("Projection View");
+    projectionGroup->setBackgroundColor(148,129,85);
+    projectionGroup->setBackgroundSelectColor(248,129,85);
+    projectionGroup->seBaseColor(180,87,128);
+    projectionGroup->setShowText(false);
+    vector<string> multi;
+    multi.push_back("none");
+    multi.push_back("top");
+    multi.push_back("bottom");
+    multi.push_back("left");
+    multi.push_back("right");
+    panel.addMultiToggle("Projection:", "AYB_PROJECTION_OPTION", 0, multi);
+    
+    
+    // SENSING:PROCESSING
+    ///////////////////////////////////////////////////////////////
+    panel.setWhichPanel("processing");
+    
+    // Algorithm 1
+    guiTypeGroup * algo1Group = panel.addGroup("Algorithm 1");
+    algo1Group->setBackgroundColor(148,129,85);
+    algo1Group->setBackgroundSelectColor(248,129,85);
+    algo1Group->seBaseColor(180,87,128);
+    algo1Group->setShowText(false);
+    panel.addToggle("Algorithm 1", "AYB_ALGO1_APPLY", false);
+    panel.addSlider("Option:", "AYB_ALGO1_OPTION", 1, 1, 100, true);
+    
+    // Algorithm 2
+    guiTypeGroup * algo2Group = panel.addGroup("Algorithm 2");
+    algo2Group->setBackgroundColor(148,129,85);
+    algo2Group->setBackgroundSelectColor(248,129,85);
+    algo2Group->seBaseColor(180,87,128);
+    algo2Group->setShowText(false);
+    panel.addToggle("Algorithm 2", "AYB_ALGO2_APPLY", false);
+    panel.addSlider("Option:", "AYB_ALGO2_OPTION", 1, 1, 100, true);
+    
+    
+    
     
     // COMMUNICATION:SYPHON
     ///////////////////////////////////////////////////////////////
-    // Add new tab
     guiTypePanel * syphonPanel = panel.addPanel("Syphon", 1, false);
     syphonPanel->setDrawLock( false );
     syphonPanel->setBackgroundColor(180,87,128);
@@ -169,7 +137,8 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
     source_types.push_back("Syphon");
     
     
- }
+}
+
 
 // Handle GUI updates (mutually exclusive options, ect)
 // This is really a manual binding to settings, which is what we want to access
@@ -190,14 +159,13 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     settings.ayb_Settings.syphon_on = panel.getValueB("AYB_SYPHON_ON");
     
     // ALGO 1 / ALGO 2: These are placeholders and should be replaced with real names before binding
-    settings.ayb_Settings.algo1_slider=panel.getValueF("AYB_ALGO1_OPTION");
-    settings.ayb_Settings.algo2_slider=panel.getValueF("AYB_ALGO2_OPTION");
     
     // Syphon
     settings.ayb_Settings.syphon_on=panel.getValueB("AYB_SYPHON_ON");
     settings.ayb_Settings.syphon_overlayAlpha=panel.getValueF("AYB_SYPHON_ALPHA");
     settings.ayb_Settings.syphon_overlaySource=panel.getValueS("AYB_SYPHON_OVERLAYSOURCE");
     settings.ayb_Settings.syphon_serverName=panel.getValueS("AYB_SYPHON_SERVERNAME");
+    
     
     //Projection option (see ayb_settings for enum type)
     settings.ayb_Settings.projectionOption=(ayb_projectionType)panel.getValueI("AYB_PROJECTION_OPTION");
@@ -209,7 +177,7 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     if (panel.getValueI("AYB_DEPTHCLIP_FAR")<= 0 || panel.getValueI("AYB_DEPTHCLIP_NEAR") <= 0 ){
         panel.setValueI("AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible);
         panel.setValueI("AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible);
-
+        
     }
     if (panel.getValueI("AYB_DEPTHCLIP_FAR")<= panel.getValueI("AYB_DEPTHCLIP_NEAR") ){
         panel.setValueI("AYB_DEPTHCLIP_FAR", (panel.getValueI("AYB_DEPTHCLIP_NEAR")+1.0));
@@ -218,21 +186,21 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     if (panel.getValueI("AYB_DEPTHCLIP_NEAR")>= panel.getValueI("AYB_DEPTHCLIP_FAR") ){
         panel.setValueI("AYB_DEPTHCLIP_NEAR", (panel.getValueI("AYB_DEPTHCLIP_NEAR")-1.0));
     }
-
+    
     
     // Apply Depth clipping option
     if (!panel.getValueB("AYB_DEPTHCLIP_APPLY")){
         //panel.setValueI("AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible);
         //panel.setValueI("AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible);
-    
+        
         settings.ayb_Settings.clip_near=settings.ayb_Settings.clip_min_possible;
         settings.ayb_Settings.clip_far=settings.ayb_Settings.clip_max_possible;
     }else{
-    
+        
         settings.ayb_Settings.clip_near=panel.getValueI("AYB_DEPTHCLIP_NEAR");
         settings.ayb_Settings.clip_far=panel.getValueI("AYB_DEPTHCLIP_FAR");
     }
- 
+    
     // OPTION: BACKGROUND SUBTRACT
     if (panel.getValueF("AYB_BGSUB_APPLY")){
         // Disable TSPS background recapture if our BG sub is on
