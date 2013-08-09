@@ -32,4 +32,4 @@
 	ignore = dirty
 [submodule "addons/ofxNI2"]
 	path = addons/ofxNI2
-	url = https://github.com/lyptik/ofxNI2.git
+	url = https://github.com/Lyptik/ofxNI2.git
