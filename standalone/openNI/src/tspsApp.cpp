@@ -33,7 +33,7 @@ void tspsApp::setup(){
         // setup OpenNI source
         //sources[i]->openSource(320,240);
         
-        string name = "C:"+ofToString( i+1 );
+        string name = "Conf:"+ofToString( i+1 );
         guiTypeButton * btn = new guiTypeButton();
         btn->setup( name, dimensions.width, dimensions.height );
         btn->setPosition( dimensions.x, dimensions.y );

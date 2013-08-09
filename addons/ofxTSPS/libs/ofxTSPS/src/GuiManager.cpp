@@ -56,10 +56,10 @@ namespace ofxTSPS {
         panelGroups["data"];
         panelGroups["custom"];
         
+        // CUSTOM
         panel.setup("custom", 10, 10, 330, 640);
-        
         buttonPosition.set(10,70);
-        
+    
         //panel layout
         panel.loadFont("fonts/times.ttf", 10);
         panel.setPosition(10, 100);
@@ -149,70 +149,96 @@ namespace ofxTSPS {
         ofAddListener(minimizeButton->buttonPressed, this, &GuiManager::minimize);
         ofAddListener(maximizeButton->buttonPressed, this, &GuiManager::maximize);
         
-        // setup source panel
         
-        guiTypePanel * videoPanel = panel.addPanel("video", 1, false);
-        videoPanel->setDrawLock( false );	
-        videoPanel->setBackgroundColor(174,139,138);
-        videoPanel->setBackgroundSelectColor(174,139,138);
         
-        panelGroups["source"].push_back( videoPanel );
+        // SOURCE:
         
-        // video settings
-        panel.setWhichPanel("video");
-        //James G: Added video settings
-        // BR: Miss U guys ;(
-        guiTypeGroup * videoSettingsGroup = panel.addGroup("camera settings");
-        videoSettingsGroup->setBackgroundColor(148,129,85);
-        videoSettingsGroup->setBackgroundSelectColor(148,129,85);
-        videoSettingsGroup->seBaseColor(244,136,136);
-        videoSettingsGroup->setShowText(false);
-#ifndef OF_VIDEO_CAPTURE_QTKIT
-        panel.addButton("open video settings");
-#endif
-        vector<string>source_types;
-        source_types.push_back("Web Camera");
-        source_types.push_back("Video File");
-        source_types.push_back("Kinect (libfreenect)");
-#ifdef TARGET_OSX
-        source_types.push_back("Syphon");
-#endif
-        source_types.push_back("Custom (OpenNI2)");
+        // INPUT panel
+        guiTypePanel * sourceSelectPanel = panel.addPanel("input", 1, false);
+        sourceSelectPanel->setDrawLock( false );	
+        sourceSelectPanel->setBackgroundColor(174,139,138);
+        sourceSelectPanel->setBackgroundSelectColor(174,139,138);
+        panelGroups["source"].push_back( sourceSelectPanel );
+        panel.setWhichPanel("input");
+            guiTypeGroup * videoSettingsGroup = panel.addGroup("camera settings");
+            videoSettingsGroup->setBackgroundColor(148,129,85);
+            videoSettingsGroup->setBackgroundSelectColor(148,129,85);
+            videoSettingsGroup->seBaseColor(244,136,136);
+            videoSettingsGroup->setShowText(false);
+            #ifndef OF_VIDEO_CAPTURE_QTKIT
+                panel.addButton("open video settings");
+            #endif
+            vector<string>source_types;
+            source_types.push_back("Web Camera");
+            source_types.push_back("Video File");
+            source_types.push_back("Kinect");
+            source_types.push_back("Kinect:OpenNI2");
+            #ifdef TARGET_OSX
+                source_types.push_back("Syphon");
+            #endif
+            panel.addMultiToggle("source type", "SOURCE_TYPE", 0, source_types);
         
-        panel.addMultiToggle("source type", "SOURCE_TYPE", 0, source_types);
+            // video files
+            guiTypeGroup * videoFilesGroup = panel.addGroup("videoFiles");
+            videoFilesGroup->setBackgroundColor(148,129,85);
+            videoFilesGroup->setBackgroundSelectColor(148,129,85);
+            videoFilesGroup->seBaseColor(58,187,147);
+            videoFilesGroup->setShowText(false);
+            
+            panel.addTextField("video directory (inside data folder)", "VIDEO_FILE_DIR", "videos", 200, 20);
+            videoFiles = new simpleFileLister();
+            int numVideoFiles = videoFiles->listDir(ofToDataPath("videos", true));
+            ofLogVerbose()<< "num video files found: " << numVideoFiles;
+            panel.addFileLister("video files:", videoFiles, 240, 100);
+            panel.addToggle("reload directory", "VIDEO_FILE_RELOAD", true);
+            
+            
         
-        // video files
-        guiTypeGroup * videoFilesGroup = panel.addGroup("videoFiles");
-        videoFilesGroup->setBackgroundColor(148,129,85);
-        videoFilesGroup->setBackgroundSelectColor(148,129,85);
-        videoFilesGroup->seBaseColor(58,187,147);
-        videoFilesGroup->setShowText(false);
         
-        panel.addTextField("video directory (inside data folder)", "VIDEO_FILE_DIR", "videos", 200, 20);
-        videoFiles = new simpleFileLister();
-        int numVideoFiles = videoFiles->listDir(ofToDataPath("videos", true));
-        ofLogVerbose()<< "num video files found: " << numVideoFiles;
-        panel.addFileLister("video files:", videoFiles, 240, 100);
-        panel.addToggle("reload directory", "VIDEO_FILE_RELOAD", true);
+        // INPUT: ADJUSTMENT
+        guiTypePanel * adjustmentPanelCommon = panel.addPanel("adjustment", 1, false);
+        adjustmentPanelCommon->setDrawLock( false );
+        adjustmentPanelCommon->setBackgroundColor(174,139,138);
+        adjustmentPanelCommon->setBackgroundSelectColor(174,139,138);
+        panelGroups["source"].push_back( adjustmentPanelCommon );
+        panel.setWhichPanel("adjustment");
+       
+            // flip + invert
+            guiTypeGroup * adjustGroup = panel.addGroup("adjust camera");
+            adjustGroup->setBackgroundColor(148,129,85);
+            adjustGroup->setBackgroundSelectColor(148,129,85);
+            adjustGroup->seBaseColor(244,136,136);
+            adjustGroup->setShowText(false);
+            panel.addToggle("flip horizontal", "FLIP_X", false);
+            panel.addToggle("flip vertical", "FLIP_Y", false);
+            panel.addToggle("invert", "INVERT", false);
+            
+            // amplification
+            guiTypeGroup * amplificationGroup = panel.addGroup("amplification");
+            amplificationGroup->setBackgroundColor(148,129,85);
+            amplificationGroup->setBackgroundSelectColor(148,129,85);
+            amplificationGroup->seBaseColor(244,136,136);
+            amplificationGroup->setShowText(false);
+            panel.addToggle("use amplification (video gain)", "USE_AMPLIFICATION", false);
+            panel.addSlider("amplification amount:", "AMPLIFICATION_AMOUNT", 1, 1, 100, true);
+
         
-        // flip + invert
-        guiTypeGroup * adjustGroup = panel.addGroup("adjust camera");
-        adjustGroup->setBackgroundColor(148,129,85);
-        adjustGroup->setBackgroundSelectColor(148,129,85);
-        adjustGroup->seBaseColor(244,136,136);
-        adjustGroup->setShowText(false);
-        panel.addToggle("flip horizontal", "FLIP_X", false);
-        panel.addToggle("flip vertical", "FLIP_Y", false);
-        panel.addToggle("invert", "INVERT", false);
+          
+        // INPUT: ADJUSTMENT DEPTH
+        guiTypePanel * adjustmentDepthPanel = panel.addPanel("adjustment:depth", 1, false);
+        adjustmentDepthPanel->setDrawLock( false );
+        adjustmentDepthPanel->setBackgroundColor(174,139,138);
+        adjustmentDepthPanel->setBackgroundSelectColor(174,139,138);
+        panelGroups["source"].push_back( adjustmentDepthPanel );
         
-        // amplification
-        guiTypeGroup * amplificationGroup = panel.addGroup("amplification");
-        amplificationGroup->setBackgroundColor(148,129,85);
-        amplificationGroup->setBackgroundSelectColor(148,129,85);
-        amplificationGroup->seBaseColor(244,136,136);
-        amplificationGroup->setShowText(false);
-        panel.addToggle("use amplification (video gain)", "USE_AMPLIFICATION", false);
-        panel.addSlider("amplification amount:", "AMPLIFICATION_AMOUNT", 1, 1, 100, true);
+        
+        
+        
+        
+        
+
+        
+       
         
         // end setup source panel
         
@@ -227,11 +253,11 @@ namespace ofxTSPS {
         // AYB_NOTE: FIXME: I would prefer this to be inside the "inject gui" code
         // But the addPanel order matters and I can't figure out how to reorder
         // also I'm tired of dealing with this GUI code
-        guiTypePanel * depthPanel = panel.addPanel("depth", 1, false);
-        depthPanel->setDrawLock( false );
-        depthPanel->setBackgroundColor(123,191,174);
-        depthPanel->setBackgroundSelectColor(123,191,174);
-        panelGroups["sensing"].push_back(depthPanel);
+        guiTypePanel * processingPanel = panel.addPanel("processing", 1, false);
+        processingPanel->setDrawLock( false );
+        processingPanel->setBackgroundColor(123,191,174);
+        processingPanel->setBackgroundSelectColor(123,191,174);
+        panelGroups["sensing"].push_back(processingPanel);
         ///
         
         guiTypePanel * differencingPanel = panel.addPanel("differencing", 1, false);
