@@ -19,6 +19,9 @@ namespace ofxTSPS {
         
             AYB_processor();
         
+            void projectBlobs(ofPoint normal, ofPoint floorPlane, int width, int height);
+            ofPoint projectPoint(ofPoint pointToProject,  ofPoint normal, ofPoint floorPlane);
+        
             ofPixelsRef autoDepthBackground(ofShortPixels& depth, int near, int far, float margin);        
             void getQuadSubImageCropped(ofImage& inputImage, ofImage& outputImage, vector <ofPoint>& quad, ofImageType imageType);
         
@@ -33,6 +36,6 @@ namespace ofxTSPS {
         
     };
     
-}
+};
 
 #endif /* defined(__openTSPS__ayb_processor__) */

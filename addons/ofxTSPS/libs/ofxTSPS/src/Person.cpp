@@ -198,7 +198,7 @@ namespace ofxTSPS {
     
     //--------------------------------------------------------------
     ofPoint Person::getCentroidNormalized(float videoWidth, float videoHeight){
-        return ofPoint(centroid.x / videoWidth, centroid.y / videoHeight);
+        return ofPoint(centroid.x / videoWidth, centroid.y / videoHeight, centroid.z);
     }
     
     //--------------------------------------------------------------

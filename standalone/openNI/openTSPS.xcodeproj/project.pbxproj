@@ -185,12 +185,12 @@
 		2E12CFF315F8168B00D5BC05 /* Processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Processor.cpp; sourceTree = "<group>"; };
 		578E979217B3A6C7003B6B9B /* ayb_processor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_processor.cpp; sourceTree = "<group>"; };
 		578E979317B3A6C7003B6B9B /* ayb_processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_processor.h; sourceTree = "<group>"; };
-		5791538117B2A623001BDC73 /* ayb_guiMod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_guiMod.cpp; sourceTree = "<group>"; };
+		5791538117B2A623001BDC73 /* ayb_guiMod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = ayb_guiMod.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		5791538217B2A623001BDC73 /* ayb_guiMod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_guiMod.h; sourceTree = "<group>"; };
 		5791538317B2A623001BDC73 /* ayb_kernel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_kernel.cpp; sourceTree = "<group>"; };
 		5791538417B2A623001BDC73 /* ayb_kernel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_kernel.h; sourceTree = "<group>"; };
-		5791538517B2A623001BDC73 /* ayb_settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ayb_settings.cpp; sourceTree = "<group>"; };
-		5791538617B2A623001BDC73 /* ayb_settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ayb_settings.h; sourceTree = "<group>"; };
+		5791538517B2A623001BDC73 /* ayb_settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = ayb_settings.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		5791538617B2A623001BDC73 /* ayb_settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ayb_settings.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		579153A017B2F221001BDC73 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO.txt; path = ../../TODO.txt; sourceTree = "<group>"; };
 		579153A217B2F279001BDC73 /* TOFIX.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TOFIX.txt; path = ../../TOFIX.txt; sourceTree = "<group>"; };
 		57D168F217B289D20020DF75 /* OpenNI2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenNI2.cpp; sourceTree = "<group>"; };
@@ -511,7 +511,7 @@
 		A9485E3015C4712A00761D1C /* CvProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CvProcessor.cpp; sourceTree = "<group>"; };
 		A9485E3215C4712A00761D1C /* GuiManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GuiManager.cpp; sourceTree = "<group>"; };
 		A9485E3715C4712A00761D1C /* OscSender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OscSender.cpp; sourceTree = "<group>"; };
-		A9485E3815C4712A00761D1C /* PeopleTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PeopleTracker.cpp; sourceTree = "<group>"; };
+		A9485E3815C4712A00761D1C /* PeopleTracker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 2; path = PeopleTracker.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		A9485E3915C4712A00761D1C /* Person.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Person.cpp; sourceTree = "<group>"; };
 		A9485E3A15C4712A00761D1C /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		A9485E3B15C4712A00761D1C /* Settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Settings.cpp; sourceTree = "<group>"; };

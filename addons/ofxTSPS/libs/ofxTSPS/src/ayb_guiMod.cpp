@@ -140,7 +140,35 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
     panel.addTextField("Syphon overlay:", "AYB_SYPHON_OVERLAYSOURCE", "syphon_1", 200, 20);
     panel.addTextField("Syphon send as:", "AYB_SYPHON_SERVERNAME", "syphon_2", 200, 20);
     source_types.push_back("Syphon");
+
     
+    // DATA:Projection
+    ///////////////////////////////////////////////////////////////
+    guiTypePanel * projectionPanel = panel.addPanel("AYB:Data", 1, false);
+    projectionPanel->setDrawLock( false );
+    projectionPanel->setBackgroundColor(180,87,128);
+    projectionPanel->setBackgroundSelectColor(180,87,128);
+    panelGroups["data"].push_back( projectionPanel );
+    panel.setWhichPanel("AYB:Data");
+    
+    
+    guiTypeGroup * projGroup1 = panel.addGroup("Group1");
+    projGroup1->setBackgroundColor(148,129,85);
+    projGroup1->setBackgroundSelectColor(248,129,85);
+    projGroup1->seBaseColor(180,87,128);
+    projGroup1->setShowText(false);
+    panel.addToggle("OSC: Mute TSPS", "AYB_MUTE_TSPSOSC", false);
+    
+    guiTypeGroup * projGroup2 = panel.addGroup("Group1");
+    projGroup2->setBackgroundColor(148,129,85);
+    projGroup2->setBackgroundSelectColor(248,129,85);
+    projGroup2->seBaseColor(180,87,128);
+    projGroup2->setShowText(false);
+    panel.addToggle("OSC: Send projection data", "AYB_SEND_PROJECTION", false);
+    
+    // Is current source a depthsource? Default false
+    settings.ayb_Settings.f_currentSourceIsDepthSource=false;
+
     
 }
 
@@ -149,6 +177,23 @@ void AYB_guiMod::injectGUI(ofxLabGui& panel,
 // This is really a manual binding to settings, which is what we want to access
 // (see ayb_Settings.cpp for the values you want to use)
 void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings){
+    
+    
+    /*
+    
+     Disabled for now, this isn't how the GUI works...
+     
+    // Disable non-depth options unless depthsource
+    if(settings.ayb_Settings.f_currentSourceIsDepthSource){
+        panel.getElement("adjustment:depth")->enable();
+        panel.getElement("AYB:Data")->enable();
+        panel.getElement("processing")->enable();
+    }else{
+        panel.getElement("adjustment:depth")->disable();
+        panel.getElement("AYB:Data")->disable();
+        panel.getElement("processing")->disable();
+    }
+    */
     
     
     // MOMENTARY: Detect Ground
@@ -162,6 +207,9 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     // ON/OFF: Just pass these through
     settings.ayb_Settings.toggle_autoBg = panel.getValueB("AYB_BGSUB_APPLY");
     settings.ayb_Settings.syphon_on = panel.getValueB("AYB_SYPHON_ON");
+    settings.ayb_Settings.f_muteTSPSOsc = panel.getValueB("AYB_MUTE_TSPSOSC");
+    settings.ayb_Settings.f_sendProjectionData = panel.getValueB("AYB_SEND_PROJECTION");
+    
     
     // ALGO 1 / ALGO 2: These are placeholders and should be replaced with real names before binding
     

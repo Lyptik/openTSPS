@@ -10,6 +10,7 @@
 #define __openTSPS__ayb_settings__
 
 #include <iostream>
+#include "OpenNI2.h"
 
 enum ayb_projectionType{
 	PROJ_NONE=0x01,
@@ -23,17 +24,33 @@ class AYB_settings {
     public:
         AYB_settings();
     
+    // Is depth source?
+    bool f_currentSourceIsDepthSource;
+    
         // Clipping
         int clip_near;
         int clip_far;
         int clip_max_possible;
         int clip_min_possible;
     
+        // Warping on/off
         bool f_warp;
+    
+        // Send default data
+        bool f_muteTSPSOsc;
+    
+        // Send projection data
+        bool f_sendProjectionData;
     
         // Processing options
         bool toggle_autoBg;
+    
+        // Ground detection
         bool f_detectGround;
+        bool ground_detected;
+        float ground_confidence;
+        nite::Plane ground_plane;
+    
     
         // Algo
         float algo1_slider;

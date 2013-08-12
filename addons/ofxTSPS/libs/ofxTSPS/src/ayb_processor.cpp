@@ -20,6 +20,8 @@ namespace ofxTSPS {
 
     }
     
+    
+    
     // Automatic depth background substraction (Works only for depth)
     ofPixelsRef AYB_processor::autoDepthBackground(ofShortPixels& depth, int near, int far, float margin){
 
@@ -88,5 +90,42 @@ namespace ofxTSPS {
         outputImage = inputImage; // Is this optimized, does pass a reference or does it copy ? Is there a better way with a ROI maybe ?
         // TODO :
         //outputImage.crop(quad[0].x, quad[0].y, quad[1].x - quad[0].x, quad[3].y - quad[0].y);
+    }
+    
+    
+    // Change the centroid coordinates on each blob to projected
+    void AYB_processor::projectBlobs(ofPoint normal, ofPoint floorPlane, int width, int height){
+        
+        // For each tracked blob
+        for (int i=0; i < trackedPeople->size(); i++){
+            ofxTSPS::Person *p;
+            p=(*trackedPeople)[i];
+            
+            ofPoint pointToProject = p->centroid;
+            pointToProject.z = p->highest.z;
+            ofPoint projectedPoint = projectPoint(pointToProject, normal, floorPlane);
+        
+            // Normalize
+            projectedPoint.x=(float)((float)projectedPoint.x/(float)width);
+            projectedPoint.y=(float)((float)projectedPoint.y/(float)height);
+            
+            
+            // Put the changed value into the person object
+            p->centroid.set(projectedPoint.x,projectedPoint.y);
+            
+        }
+    }
+    
+    // Project a point using the ground
+    // From: http://metasquid.com/19dSe9O
+    //
+    // The projection of a point q = (x, y, z) onto a plane given by a point p = (a, b, c)
+    // and a normal n = (d, e, f) (assuming n is a unit vector) is
+    //
+    // q_proj = q - dot(q - p, n) * n
+    //
+    ofPoint AYB_processor::projectPoint(ofPoint pointToProject,  ofPoint normal, ofPoint floorPlane){
+        ofPoint projectedPoint = pointToProject - (pointToProject-floorPlane).dot(normal) * normal;
+        return projectedPoint;
     }
 }

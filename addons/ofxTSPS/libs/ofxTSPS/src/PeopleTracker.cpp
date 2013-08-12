@@ -265,7 +265,9 @@ namespace ofxTSPS {
                 }
                 
                 if (bOscEnabled){
-                    oscClient.sceneUpdated(scene);
+                    if (!p_Settings->ayb_Settings.f_muteTSPSOsc){
+                        oscClient.sceneUpdated(scene);
+                    }
                 }
                 
                 if (bTcpEnabled){
@@ -373,7 +375,9 @@ namespace ofxTSPS {
             tuioClient.cursorPressed(1.0*centroid.x/width, 1.0*centroid.y/height, person->oid );
         }
         if(bOscEnabled){
-            oscClient.personEntered(person, centroid, width, height, p_Settings->bSendOscContours);
+            if (!p_Settings->ayb_Settings.f_muteTSPSOsc){
+                oscClient.personEntered(person, centroid, width, height, p_Settings->bSendOscContours);
+            }
         }
         if(bTcpEnabled){
             tcpClient.personEntered(person, centroid, width, height, p_Settings->bSendOscContours);
@@ -405,7 +409,9 @@ namespace ofxTSPS {
         }
         
         if (bOscEnabled){
-            oscClient.personUpdated(person, centroid, width, height, p_Settings->bSendOscContours);
+            if (!p_Settings->ayb_Settings.f_muteTSPSOsc){
+                oscClient.personUpdated(person, centroid, width, height, p_Settings->bSendOscContours);
+            }
         }
         
         if (bTcpEnabled){
@@ -419,6 +425,8 @@ namespace ofxTSPS {
         if ( bSpacebrewEnabled ){
             spacebrewSender.personUpdated(person, centroid, width, height, p_Settings->bSendOscContours);
         }
+        
+        
         // notify listeners
         EventArgs args;
         args.person = person;
@@ -434,7 +442,9 @@ namespace ofxTSPS {
         }
         //send osc kill message if enabled
         if (bOscEnabled){
+            if (!p_Settings->ayb_Settings.f_muteTSPSOsc){
             oscClient.personWillLeave(person, centroid, width, height, p_Settings->bSendOscContours);
+            }
         };
         
         //send tcp kill message if enabled
@@ -937,6 +947,9 @@ namespace ofxTSPS {
             cout << "Normal:" << floor.normal.x <<","<< floor.normal.y <<","<< floor.normal.z << endl;
 
             // Clear the flag
+            p_Settings->ayb_Settings.ground_confidence=confidence;
+            p_Settings->ayb_Settings.ground_plane=floor;
+            p_Settings->ayb_Settings.ground_detected=true;
             p_Settings->ayb_Settings.f_detectGround=false;
         }
         
@@ -1018,6 +1031,53 @@ namespace ofxTSPS {
         // Track
         //-----------------------	
         differencedImage.setFromPixels( tspsProcessor->process( grayDiff ) );
+        
+        
+        // ayb project coords
+        if(p_Settings->ayb_Settings.f_sendProjectionData
+           && (currentSource->getType() == CAMERA_CUSTOM
+            || currentSource->getType() == ONI_SEQUENCE) ){
+               
+           
+               // Has the ground been detected?
+               if(!p_Settings->ayb_Settings.ground_detected){
+                   //ofLogError() << "PeopleTracker: Automated ground detection not working yet, do it manually" << endl;
+                   
+                   // Grab the floor and confidence (not this required modifying the framework to surface the userTrackerFrame)
+                   nite::Plane floor = ((OpenNI2*)currentSource)->userTracker.getFloor();
+                   float confidence  = ((OpenNI2*)currentSource)->userTracker.getFloorConfidence();
+                   
+                   
+                   // Display
+                   cout << "Confidence:" << confidence << endl;
+                   cout << "Point:"  << floor.point.x <<","<< floor.point.y <<","<< floor.point.z << endl;
+                   cout << "Normal:" << floor.normal.x <<","<< floor.normal.y <<","<< floor.normal.z << endl;
+                   
+                   // Clear the flag
+                   p_Settings->ayb_Settings.ground_confidence=confidence;
+                   p_Settings->ayb_Settings.ground_plane=floor;
+                   p_Settings->ayb_Settings.ground_detected=true;
+                   p_Settings->ayb_Settings.f_detectGround=false;
+                   
+                   
+               }else{
+                   
+                   ofPoint normal;
+                   normal.x = p_Settings->ayb_Settings.ground_plane.normal.x;
+                   normal.y = p_Settings->ayb_Settings.ground_plane.normal.y;
+                   normal.z = p_Settings->ayb_Settings.ground_plane.normal.z;
+                   
+                   ofPoint floorPlane;
+                   floorPlane.x = p_Settings->ayb_Settings.ground_plane.point.x;
+                   floorPlane.y = p_Settings->ayb_Settings.ground_plane.point.y;
+                   floorPlane.z = p_Settings->ayb_Settings.ground_plane.point.z;
+                   
+                   ((AYB_processor*)tspsProcessor)->projectBlobs(normal,floorPlane,width,height);
+               }
+          
+        }
+        
+        
     }
     
     //---------------------------------------------------------------------------
@@ -1522,6 +1582,7 @@ namespace ofxTSPS {
             gui.update();
             if (p_Settings == NULL) p_Settings = gui.getSettings();
             p_Settings->inputType = CAMERA_VIDEOGRABBER;
+            p_Settings->ayb_Settings.f_currentSourceIsDepthSource=false;
         }
     }
     
@@ -1538,6 +1599,7 @@ namespace ofxTSPS {
             gui.update();
             if (p_Settings == NULL) p_Settings = gui.getSettings();
             p_Settings->inputType = CAMERA_KINECT;
+            p_Settings->ayb_Settings.f_currentSourceIsDepthSource=true;
         }
     }
     
@@ -1553,7 +1615,8 @@ namespace ofxTSPS {
             gui.setValueI( "SOURCE_TYPE", CAMERA_VIDEOFILE );
             gui.update();
             if (p_Settings == NULL) p_Settings = gui.getSettings();
-            p_Settings->inputType = CAMERA_VIDEOFILE;            
+            p_Settings->inputType = CAMERA_VIDEOFILE;
+            p_Settings->ayb_Settings.f_currentSourceIsDepthSource=false;
         }
     }
     
@@ -1582,6 +1645,7 @@ namespace ofxTSPS {
             gui.update();
             if (p_Settings == NULL) p_Settings = gui.getSettings();
             p_Settings->inputType = CAMERA_SYPHON;
+            p_Settings->ayb_Settings.f_currentSourceIsDepthSource=false;
         }
     }
 #endif
@@ -1599,6 +1663,7 @@ namespace ofxTSPS {
             gui.update();
             if (p_Settings == NULL) p_Settings = gui.getSettings();
             p_Settings->inputType = CAMERA_CUSTOM;
+            p_Settings->ayb_Settings.f_currentSourceIsDepthSource=true;
         }
     }
     

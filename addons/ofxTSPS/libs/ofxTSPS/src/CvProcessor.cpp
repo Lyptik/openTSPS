@@ -216,7 +216,7 @@ namespace ofxTSPS {
                 p->update(true);
                 
                 
-                //normalize simple contour
+                //normalize simple contourx
                 for (int i=0; i<p->simpleContour.size(); i++){
                     p->simpleContour[i].x /= tspsWidth;
                     p->simpleContour[i].y /= tspsHeight;

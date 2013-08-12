@@ -11,8 +11,7 @@
 // Constructor
 AYB_settings::AYB_settings(){
 
-    // In general access these like this:
-    // settings.ayb_settings.VALUE
+    f_currentSourceIsDepthSource=false;
     
     // Clipping settings
     clip_max_possible=4000;
@@ -24,7 +23,11 @@ AYB_settings::AYB_settings(){
     
     // Processing options
     toggle_autoBg = false;
+    
+    // Ground detection
     f_detectGround=false;
+    ground_detected = false;
+    ground_confidence=0;
     
     // Algo
     algo1_slider = 0;
@@ -39,5 +42,7 @@ AYB_settings::AYB_settings(){
     // Which projection to display
     projectionOption = PROJ_NONE;
 
+    f_muteTSPSOsc=false;
+    f_sendProjectionData=false;
     
 }
