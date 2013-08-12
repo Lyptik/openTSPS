@@ -48,7 +48,7 @@ namespace ofxTSPS {
         depthRemapToRange(m_background, backgroundImage.getPixelsRef(), near, far, false);
 
         // Copying background to the progressiveBackground buffer
-        progressiveBackgroundImage.setFromPixels( backgroundImage.getPixelsRef());
+        //progressiveBackgroundImage.setFromPixels( backgroundImage.getPixelsRef());
         
         // Returning 8bits background
         return backgroundImage.getPixelsRef();
@@ -83,10 +83,23 @@ namespace ofxTSPS {
         }
     }
     
+    // TOFIX : This function has to be fixed and triggered !
     void AYB_processor::getQuadSubImageCropped(ofImage& inputImage, ofImage& outputImage, vector <ofPoint>& quad, ofImageType imageType) {
         
-        outputImage = inputImage; // Is this optimized, does pass a reference or does it copy ? Is there a better way with a ROI maybe ?
-        // TODO :
-        //outputImage.crop(quad[0].x, quad[0].y, quad[1].x - quad[0].x, quad[3].y - quad[0].y);
+        if ( quad.size() < 4 ){
+            ofLog( OF_LOG_ERROR, "You must pass a vector of four points to this function");
+            return;
+        } // weird thing that could happen...
+        
+        float width = quad[1].x - quad[0].x;
+        float height = quad[3].y - quad[0].y;
+        static float old_width = width;
+        static float old_height = height;
+        
+        // TOFIX : Quick hack ! without this there is weird glitch on the differencing window
+        /*if (width != old_width && height != old_height)
+            doRelearnBackground = true;*/
+
+        outputImage.cropFrom(inputImage, quad[0].x, quad[0].y, width, 300);
     }
 }

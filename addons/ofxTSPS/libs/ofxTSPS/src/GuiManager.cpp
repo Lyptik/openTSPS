@@ -975,8 +975,17 @@ namespace ofxTSPS {
         // because this returns a pointer to the actual points that get updated,
         // you store it in an array so it doesn't get updated when it draws
         ofPoint * scaledPoints = quadGui.getScaledQuadPoints(cameraWidth,cameraHeight);
-        for (int i=0; i<4; i++){
-            settings.quadWarpScaled[i] = scaledPoints[i];
+
+        if(!settings.ayb_Settings.f_warp) {
+            // Basically ignore point 1 and 3 (top right and bottom left)
+            settings.quadWarpScaled[0] = scaledPoints[0];
+            settings.quadWarpScaled[2] = scaledPoints[2];
+            settings.quadWarpScaled[1].set(scaledPoints[2].x, scaledPoints[0].y);
+            settings.quadWarpScaled[3].set(scaledPoints[0].x, scaledPoints[2].y);
+          
+        } else {
+            for (int i=0; i<4; i++)
+                settings.quadWarpScaled[i] = scaledPoints[i];
         }
         
         //modify custom parameters
@@ -1155,8 +1164,8 @@ namespace ofxTSPS {
     void GuiManager::mousePressed(ofMouseEventArgs &e)
     {
         if(enableGui) panel.mousePressed(e.x, e.y, e.button);
-        if(quadGuiSetup){
-        }
+        //if(quadGuiSetup){
+        //}
     }
     
     void GuiManager::mouseDragged(ofMouseEventArgs &e)
