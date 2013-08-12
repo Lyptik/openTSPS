@@ -854,10 +854,13 @@ namespace ofxTSPS {
         //-------------------------------
         
         // Crop or warp background
-        if(p_Settings->ayb_Settings.f_warp)
+        
+        // FIXME : Should be regular cropping instead of warping when actually forcing the quad points to be a square (means no warping happening)
+        //if(p_Settings->ayb_Settings.f_warp)
             ((CvProcessor*)tspsProcessor)->getQuadSubImageWarped(cameraImage, warpedImage, p_Settings->quadWarpScaled, OF_IMAGE_GRAYSCALE);
-        else
+        /*else {
             ((AYB_processor*)tspsProcessor)->getQuadSubImageCropped(cameraImage, warpedImage, p_Settings->quadWarpScaled, OF_IMAGE_GRAYSCALE);
+        }*/
         
         // mirror?
         if ( p_Settings->bFlipX || p_Settings->bFlipY ){

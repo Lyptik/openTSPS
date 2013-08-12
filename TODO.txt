@@ -1,10 +1,7 @@
 # Coding :
 
-- Move depth clipping stuff in adjustment + add an option to enable/disable skewing + move projection stuff into it
-    -> apply them on depth buffer as well
-- Automatic background substraction (background tab gui button and algo)
-	-> mix with the progressive background stuff
-    -> not work when skewing
+- Apply depth clipping and cropiing to the "real" depth buffer
+- Automatic background substraction -> Better CPU stuff
 - depth panel
 	-> ground detection
 	-> top / bottom / ... / free camera projection -> see camera objects in openframeworks
@@ -27,3 +24,8 @@
 - Custom algo solution
 - Syphon server to make visual to each point of the pipe
 - Adding warping of the grid
+
+TOFIX :
+
+- quad gui when not warping should be blocked and crop function should be used instead of warping
+- 
