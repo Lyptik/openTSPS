@@ -106,10 +106,13 @@ namespace ofxTSPS {
             void    setUseVideoFile( bool bUseVideoFile = true);
             bool    useVideoGrabber();
             void    setUseVideoGrabber( bool bUseVideoGrabber = true);
-#ifdef TARGET_OSX
-            bool    useSyphon();
-            void    setUseSyphon( bool bUseSyphon = true);
-#endif
+        
+            // Syphon is OSX only
+            #ifdef TARGET_OSX
+                bool    useSyphon();
+                void    setUseSyphon( bool bUseSyphon = true);
+            #endif
+        
             bool    useCustomSource();
             void    setUseCustomSource( bool bUseCustomSource = true);
         

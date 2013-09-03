@@ -174,12 +174,12 @@ namespace ofxTSPS {
             // enumerated type or the GUI won't work right Constants.h/SourceType
             vector<string>source_types;
             source_types.push_back("Web Camera");
-            source_types.push_back("Video File");
-            source_types.push_back("Kinect");
+            source_types.push_back("Video File (open ONI)");
+            source_types.push_back("Kinect (libfreenect)");
             #ifdef TARGET_OSX
                     source_types.push_back("Syphon");
             #endif
-            source_types.push_back("Custon (Kinect:OpenNI2)");
+            source_types.push_back("OpenNI2");
             panel.addMultiToggle("source type", "SOURCE_TYPE", 0, source_types);
         
             // video files
@@ -803,25 +803,34 @@ namespace ofxTSPS {
         update();
     }
     
+    // GUI Update loop, includes lots of logic
     void GuiManager::update(){
-        if(!enableGui){
-            //if the gui is not shown no need to propagate values
-            return;
-        }
         
+        //if the gui is not shown no need to propagate values
+        if(!enableGui){return;}
+        
+        // Update the panel
         panel.update();
         
-        // camera
+        // Which source type do we have selected?
+        // This is a fixed value related to the GUI order (and also in SourceType enum type in consts)
         
-        //settings.cameraIndex = panel.getValueF("CAMERA_INDEX");
-        //settings.bUseKinect  = panel.getValueB("USE_KINECT");
+        // 0 = Web Camera   CAMERA_VIDEOGRABBER
+        // 1 = Video File   CAMERA_VIDEOFILE
+        // 2 = Kinect       CAMERA_KINECT
+        // 3 = Syphon       CAMERA_SYPHON
+        // 4 = OpenNI2      CAMERA_CUSTOM
+        // 5 = (not in UI)  CAMERA_UNDEFINED
+        // 6 = (not in UI)  ONI_SEQUENCE
         settings.inputType     = (SourceType) panel.getValueI("SOURCE_TYPE");
         
-        if ( settings.inputType == CAMERA_VIDEOFILE){
+        // If it's "video file" then display file selection panel
+        if (settings.inputType == CAMERA_VIDEOFILE){
             panel.getElement("videoFiles")->enable();
         } else {
             panel.getElement("videoFiles")->disable();
         }
+        
         
         // video files
         bool bIsNewDirectory = false;
@@ -844,7 +853,6 @@ namespace ofxTSPS {
         }
         
         // threshold
-        
         settings.threshold = panel.getValueF("THRESHOLD");
         settings.bSmooth = panel.getValueB("USE_SMOOTHING");
         settings.smooth = panel.getValueF("SMOOTH_AMOUNT");

@@ -6,8 +6,6 @@ tspsApp::tspsApp( int numCameras ){
     for (int i=0; i<numCameras; i++){
         delegates.push_back( new ofxTSPS::Delegate(i) );
         delegates.back()->disableEvents();
-        
-        //sources.push_back( new ofxTSPS::OpenNI2() );
     }
 }
 
@@ -17,23 +15,21 @@ void tspsApp::setup(){
 	ofSetFrameRate(60);
 	ofBackground(223, 212, 190);
     
-    // which delegate is getting drawn
+    // "Delegate" is TSPS for source+configuration (so you can have and switch between multiple configs)
+    
+    // which delegate is being drawn
     currentDelegate = 0;
     if ( delegates.size() > 0 ){
         delegates[currentDelegate]->enableEvents();
     }
     
-    // add buttons for switching between cameras
+    // add buttons for switching between delegates
     ofRectangle dimensions = ofRectangle( 105, 10, 50, buttonHeight);
     
+    // Initialize each delegate
     for ( int i=0; i<delegates.size(); i++){
-        delegates[i]->setup();
-        //delegates[i]->getPeopleTracker()->setSource(*sources[i]);
-        
-        // setup OpenNI source
-        //sources[i]->openSource(320,240);
-        
-        string name = "Conf:"+ofToString( i+1 );
+        delegates[i]->setup();        
+        string name = "Config:"+ofToString( i+1 );
         guiTypeButton * btn = new guiTypeButton();
         btn->setup( name, dimensions.width, dimensions.height );
         btn->setPosition( dimensions.x, dimensions.y );

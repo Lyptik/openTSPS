@@ -513,7 +513,10 @@ namespace ofxTSPS {
             currentSource->closeSource();
             currentSource = NULL;
         }
-        string etc = "";
+        
+        
+        string fileName = "";
+        
         switch ( type ){
             case CAMERA_KINECT:
                 currentSource = new Kinect();
@@ -523,8 +526,8 @@ namespace ofxTSPS {
                 break;
             case CAMERA_VIDEOFILE:
                 // see if there is a valid video file set first
-                etc = getVideoFile();
-                if ( etc == ""){
+                fileName = getVideoFile();
+                if ( fileName == ""){
                     return false;
                 }
                 currentSource = new VideoFile();
@@ -540,8 +543,8 @@ namespace ofxTSPS {
                 currentSource = new ofxTSPS::OpenNI2();
                 break;
             case ONI_SEQUENCE:
-                etc = getVideoFile();
-                if ( etc == ""){
+                fileName = getVideoFile();
+                if ( fileName == ""){
                     return false;
                 }
                 currentSource = new ofxTSPS::OpenNI2();
@@ -551,7 +554,7 @@ namespace ofxTSPS {
                 break;
         }
         currentSource->setSourceIndex( which );
-        bSourceSetup = currentSource->openSource( width, height, etc );
+        bSourceSetup = currentSource->openSource( width, height, fileName );
         
         // override settings (if necessary)
         switch( currentSource->getType() ){

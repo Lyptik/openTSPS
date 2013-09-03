@@ -45,7 +45,7 @@ bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
         cout << "OPENNI2: BISOPEN setup..." << endl;
         bIsOpen = setup(*device);
         if ( farClipping == -1 ) farClipping = stream.getMaxPixelValue();
-        //setFps(30);
+        setFps(30);
         bDepthSetup  = bIsOpen;
     } else {
         bIsOpen = true;
@@ -56,7 +56,9 @@ bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
     
     // Now set up user tracker
     cout << "OPENNI2: Tracker setup..."<<endl;
-    userTracker.setup(*device);
+    
+    // This works on ONI files but breaks on live
+    //userTracker.setup(*device);
 
     
     return bIsOpen;
