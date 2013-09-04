@@ -245,11 +245,9 @@ void AYB_guiMod::processGUIUpdates(ofxLabGui &panel, ofxTSPS::Settings &settings
     if (!panel.getValueB("AYB_DEPTHCLIP_APPLY")){
         //panel.setValueI("AYB_DEPTHCLIP_NEAR", settings.ayb_Settings.clip_min_possible);
         //panel.setValueI("AYB_DEPTHCLIP_FAR", settings.ayb_Settings.clip_max_possible);
-        
         settings.ayb_Settings.clip_near=settings.ayb_Settings.clip_min_possible;
         settings.ayb_Settings.clip_far=settings.ayb_Settings.clip_max_possible;
     }else{
-        
         settings.ayb_Settings.clip_near=panel.getValueI("AYB_DEPTHCLIP_NEAR");
         settings.ayb_Settings.clip_far=panel.getValueI("AYB_DEPTHCLIP_FAR");
     }

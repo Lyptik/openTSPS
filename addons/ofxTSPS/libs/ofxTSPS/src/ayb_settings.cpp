@@ -14,7 +14,7 @@ AYB_settings::AYB_settings(){
     f_currentSourceIsDepthSource=false;
     
     // Clipping settings
-    clip_max_possible=4000;
+    clip_max_possible=10500;
     clip_min_possible=1;
     clip_near=clip_min_possible;
     clip_far=clip_max_possible;

@@ -105,7 +105,6 @@ namespace ofxTSPS {
         outputImage.cropFrom(inputImage, quad[0].x, quad[0].y, width, 300);
     }
     
-    
     // Change the centroid coordinates on each blob to projected
     void AYB_processor::projectBlobs(ofPoint normal, ofPoint floorPlane, int width, int height){
         

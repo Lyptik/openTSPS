@@ -54,10 +54,10 @@ bool ofxTSPS::OpenNI2::openSource(int width, int height, string etc){
     if (bIsOpen){start();}
     
     
-    // Now set up user tracker
-    cout << "OPENNI2: Tracker setup..."<<endl;
-    
     // This works on ONI files but breaks on live
+    
+    // Now set up user tracker
+    //cout << "OPENNI2: Tracker setup..."<<endl;
     //userTracker.setup(*device);
 
     
